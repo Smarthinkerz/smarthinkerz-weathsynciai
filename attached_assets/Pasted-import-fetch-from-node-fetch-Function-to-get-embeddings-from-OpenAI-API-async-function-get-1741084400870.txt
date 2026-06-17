@@ -1,0 +1,92 @@
+import fetch from 'node-fetch';
+
+// Function to get embeddings from OpenAI API
+async function getEmbeddings(texts: string[]): Promise<number[][]> {
+    try {
+        const response = await fetch("https://api.openai.com/v1/embeddings", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer YOUR_API_KEY`,  // Replace with your API key
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: "text-embedding-ada-002",
+                input: texts
+            })
+        });
+
+        if (!response.ok) {
+            console.error("Failed to get embeddings:", response.status, response.statusText);
+            return [];
+        }
+
+        const data = await response.json();
+        return data.data.map((item: any) => item.embedding);
+    } catch (error) {
+        console.error("Error in getEmbeddings:", error);
+        return [];
+    }
+}
+
+// Function to calculate cosine similarity
+function cosineSimilarity(vec1: number[], vec2: number[]): number {
+    const dotProduct = vec1.reduce((sum, value, i) => sum + value * vec2[i], 0);
+    const magnitude = Math.sqrt(vec1.reduce((sum, value) => sum + value ** 2, 0)) *
+                      Math.sqrt(vec2.reduce((sum, value) => sum + value ** 2, 0));
+    return dotProduct / magnitude;
+}
+
+// Main function to get job recommendations
+async function getJobRecommendations(req: any, res: any) {
+    try {
+        // Extract user skills
+        const userSkills: string[] = req.user?.skills || [];
+        if (userSkills.length === 0) {
+            console.log("No skills found for user.");
+            res.status(400).json({ error: "User has no skills listed." });
+            return;
+        }
+
+        console.log("User skills:", userSkills);
+
+        // Get embeddings for user skills
+        const skillEmbeddings = await getEmbeddings(userSkills);
+        if (skillEmbeddings.length === 0) {
+            console.log("Failed to get skill embeddings.");
+            res.status(500).json({ error: "Failed to get skill embeddings." });
+            return;
+        }
+
+        // Fetch available jobs
+        const jobs = await agentCollaboration.scoutOpportunities(req.user);  // Assuming this function exists
+        console.log("Found jobs:", jobs.length);
+
+        if (!jobs || jobs.length === 0) {
+            console.log("No jobs found.");
+            res.json([]);
+            return;
+        }
+
+        // Get embeddings for job descriptions
+        const jobDescriptions = jobs.map((job: any) => job.description);
+        const jobEmbeddings = await getEmbeddings(jobDescriptions);
+
+        // Match jobs based on skill similarity
+        const THRESHOLD = 0.75;  // Adjust threshold if needed
+        const recommendedJobs = jobs.filter((job: any, index: number) => {
+            return skillEmbeddings.some(skillVec => {
+                const similarity = cosineSimilarity(skillVec, jobEmbeddings[index]);
+                return similarity >= THRESHOLD;
+            });
+        });
+
+        console.log("Recommended jobs:", recommendedJobs.length);
+        res.json(recommendedJobs);
+    } catch (error) {
+        console.error("Error in getJobRecommendations:", error);
+        res.status(500).json({ error: "Failed to get job recommendations." });
+    }
+}
+
+// Endpoint to get job recommendations
+app.post("/api/recommend-jobs", getJobRecommendations);

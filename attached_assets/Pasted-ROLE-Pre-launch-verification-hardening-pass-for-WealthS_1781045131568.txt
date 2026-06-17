@@ -1,0 +1,47 @@
+ROLE
+Pre-launch verification + hardening pass for WealthSync AI. The number-integrity work is done.
+Now verify/finish the launch-critical items the agent can own. Report each with file:line or
+command evidence. Distinguish "verified in code" from "requires the human" (e.g. a real payment).
+
+HARD CONSTRAINTS
+- Do not weaken the computation engine, the no-AI guard, honest labels, or any disclaimer/badge
+  honesty already in place.
+- Never print secret values — report each required secret as present/absent only.
+- No overclaiming: a traced code path is "code-verified", not "verified with a real transaction".
+
+TASK 1 — DISCLAIMER COVERAGE  [compliance]
+Grep every screen that gives financial/portfolio/investment guidance or shows a score, and confirm
+the "not financial advice" disclaimer is present (and "not legal advice" on Smart Contracts/Legal).
+Output a per-file table: [screen → disclaimer line → present/absent]. Add any that are missing.
+
+TASK 2 — RBAC + TENANT ISOLATION  [security — multi-tenant]
+Confirm role-based access and tenant/account isolation are enforced SERVER-SIDE on every privileged
+route (not just hidden menus), for both the individual and company account types. Show the
+middleware/guard (file:line). Flag any endpoint that returns another tenant's data.
+
+TASK 3 — PREMIUM GATING FOR RISK ANALYTICS
+Risk analytics is becoming a paid-tier feature. For non-premium users, the panel must show a clean
+"premium feature — upgrade" state, NOT "insufficient data" (which looks broken). For premium users
+it populates (once the data feed is licensed/live). Show the gate (file:line).
+
+TASK 4 — SEED DATA (no empty demo-ware)
+Ensure every major section renders meaningful content on a fresh login (the two-dozen features
+shouldn't look empty to a buyer). Seed realistic data; label any genuine beta features as "beta".
+
+TASK 5 — BILLING PATH (code-verify + hand me a test procedure)
+Report whether live Tap keys are set (present/absent only). Trace checkout → Tap → webhook →
+tier update in DB (file:line). Give me a step-by-step procedure to run ONE real transaction plus
+the exact SQL to confirm it (new subscription row + tier change). Mark this "requires human".
+
+TASK 6 — HYGIENE
+Confirm error tracking (Sentry DSN present/absent + initialized, file:line) and add boot-time env
+validation for required vars (DB URL, session secret, Tap keys) so a misconfigured deploy fails loudly.
+
+DEFINITION OF DONE (go/no-go checklist)
+- [ ] Disclaimers present on every guidance/score screen (per-file proof).
+- [ ] RBAC + tenant isolation enforced server-side for both account types; no cross-tenant leakage.
+- [ ] Risk-analytics panel shows clean premium-upgrade state for non-premium users.
+- [ ] Every section renders content on fresh login; betas labeled.
+- [ ] Billing path traced; real-transaction procedure + verification SQL provided (charge is mine to run).
+- [ ] Sentry initialized; env validation guards required vars.
+- Report per-item evidence; flag every step that needs ME.

@@ -1,0 +1,61 @@
+import express from 'express';
+import { getEmbeddings, cosineSimilarity } from './services/openai-service';
+
+const app = express();
+app.use(express.json());
+
+async function getJobRecommendations(req: any, res: any) {
+    try {
+        // Extract user skills
+        const userSkills: string[] = req.user?.skills || [];
+        if (userSkills.length === 0) {
+            console.log("No skills found for user.");
+            res.status(400).json({ error: "User has no skills listed." });
+            return;
+        }
+
+        console.log("User skills:", userSkills);
+
+        // Get embeddings for user skills
+        const skillEmbeddings = await getEmbeddings(userSkills);
+        if (skillEmbeddings.length === 0) {
+            console.log("Failed to get skill embeddings.");
+            res.status(500).json({ error: "Failed to get skill embeddings." });
+            return;
+        }
+
+        // Fetch available jobs (mocked or replace with your function)
+        const jobs = await agentCollaboration.scoutOpportunities(req.user);  // Assuming this function exists
+        console.log("Found jobs:", jobs.length);
+
+        if (!jobs || jobs.length === 0) {
+            console.log("No jobs found.");
+            res.json([]);
+            return;
+        }
+
+        // Get embeddings for job descriptions
+        const jobDescriptions = jobs.map((job: any) => job.description);
+        const jobEmbeddings = await getEmbeddings(jobDescriptions);
+
+        // Match jobs based on skill similarity
+        const THRESHOLD = 0.75;  // Adjust threshold if needed
+        const recommendedJobs = jobs.filter((job: any, index: number) => {
+            return skillEmbeddings.some(skillVec => {
+                const similarity = cosineSimilarity(skillVec, jobEmbeddings[index]);
+                return similarity >= THRESHOLD;
+            });
+        });
+
+        console.log("Recommended jobs:", recommendedJobs.length);
+        res.json(recommendedJobs);
+    } catch (error) {
+        console.error("Error in getJobRecommendations:", error);
+        res.status(500).json({ error: "Failed to get job recommendations." });
+    }
+}
+
+// Endpoint to get job recommendations
+app.post("/api/recommend-jobs", getJobRecommendations);
+
+app.listen(3000, () => console.log("Server running on http://localhost:3000"));

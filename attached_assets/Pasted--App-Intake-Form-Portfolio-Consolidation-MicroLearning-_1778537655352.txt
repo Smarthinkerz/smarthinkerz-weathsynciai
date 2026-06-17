@@ -1,0 +1,344 @@
+# App Intake Form — Portfolio Consolidation
+## MicroLearning Coach for Shift Workers
+
+---
+
+## 1. Identity
+
+**App name:** MicroLearning Coach (Smarthinkerz LearnShift)
+
+**One-line purpose:** AI-powered adaptive micro-learning platform delivering 3-10 minute lessons scheduled around shift workers' schedules with offline-first capability, SCORM/xAPI compliance, and enterprise team management.
+
+**Public URL (Replit dev):** https://3000-il0yqsuee3zhylh29vky5-3d367bd3.us1.manus.computer
+
+**Admin URL (if separate):** https://3000-il0yqsuee3zhylh29vky5-3d367bd3.us1.manus.computer/admin-crm
+
+**Repository / Replit project URL:** Manus WebDev Project (private, not on GitHub)
+
+**Status:** dev (pre-launch, no paying users yet)
+
+**Approx monthly active users:** 1 (test account: cosmic Tech)
+
+**Approx monthly revenue (USD):** $0 (no payments processed in test environment)
+
+---
+
+## 2. Tech Stack
+
+**Backend language + framework:** Node.js + Express 4 + tRPC 11 (TypeScript)
+
+**Frontend:** React 19 + Tailwind CSS 4 + shadcn/ui components + Wouter (routing)
+
+**Database:** MySQL/TiDB with Drizzle ORM (24 tables, schema-first migrations)
+
+**Hosted on:** Manus WebDev (managed hosting with auto-scaling)
+
+**External APIs/services in use:**
+- **Manus OAuth** - User authentication & session management
+- **Smarthinkerz Tap Payments** - Payment processing (checkout & verification)
+- **ElevenLabs** - AI voice narration for lessons (text-to-speech)
+- **Resend** - Email notifications (payment confirmations, system alerts)
+- **Manus Forge API** - Built-in LLM for lesson generation & AI features
+- **AWS S3** - File storage (lesson media, user uploads)
+- **Google Maps** - Location-based features (via Manus proxy)
+
+---
+
+## 3. Public-Facing Features
+
+**Landing page sections:**
+- Hero section: "Train Your Workforce Without Disrupting Shifts"
+- Feature highlights: Shift-aware delivery, 3-10 minute lessons, offline-first, analytics, SCORM/xAPI compliance, cross-platform
+- Industry targeting: Hospitality, Healthcare, Logistics, Retail, Manufacturing, Food Service
+- "How It Works" section (3 steps: Import Roster → Create Lessons → Assign & Track)
+- Call-to-action buttons: "Start Free Trial", "See Features"
+- Navigation: Pricing, Dashboard, Lesson Library
+
+**Public sub-pages:**
+- `/pricing` - Subscription tiers (Starter $3.95/user/mo, Pro $8.95/user/mo, Enterprise $12/user/mo)
+- `/` - Home/landing page
+- `/checkout/success` - Payment confirmation page
+- `/checkout/failed` - Payment failure page
+
+**Public APIs:** None (all APIs require authentication via tRPC)
+
+**Forms that collect data:**
+- OAuth login form (email/social login via Manus)
+- Onboarding wizard (shift schedule, lesson preferences)
+- Pricing page (plan selection, quantity selector)
+- Checkout form (redirects to Smarthinkerz payment page)
+
+---
+
+## 4. Authenticated User Features
+
+**Auth method:** Manus OAuth (email/social login, session cookies with JWT)
+
+**Sections/tabs in the user dashboard:**
+- **Dashboard** - Overview, upcoming lessons, progress summary
+- **My Lessons** - Assigned lessons with progress tracking
+- **Lesson Library** - Browse 162 lessons, search/filter by category/difficulty
+- **My Shifts** - View/edit shift schedule (used for lesson scheduling)
+- **Assignments** - View assigned lesson batches
+- **Certificates** - Download completion certificates
+- **Content Studio** - Create/edit lessons (content_author role)
+- **Review Queue** - Review lessons pending approval (content_author role)
+- **Roster** - Manage team members (employer_admin/super_admin role)
+- **Assign Lessons** - Bulk assign lessons to users (employer_admin role)
+- **Analytics** - View completion rates, scores, engagement metrics (employer_admin role)
+- **Compliance** - GDPR data export, consent management
+- **Security** - IP allowlist, breach notifications, audit logs
+- **System Status** - Monitor 6 services (app, database, email, payments, LLM, voice)
+- **Settings** - Profile, timezone, notifications, quiet hours
+
+**Subscription tiers + price for each:**
+1. **Starter** - $3.95/user/month (monthly) or $39.50/user/year (annual)
+2. **Pro** - $8.95/user/month (monthly) or $89.50/user/year (annual)
+3. **Enterprise** - $12.00/user/month (monthly) or $120.00/user/year (annual)
+4. **Free Trial** - 14 days of Pro features (no payment required)
+
+**Limits per tier:**
+
+| Feature | Starter | Pro | Enterprise |
+|---------|---------|-----|------------|
+| Max Lessons | 30 | Unlimited | Unlimited |
+| Offline Access | ✅ | ✅ | ✅ |
+| Basic Tracking | ✅ | ✅ | ✅ |
+| Full Analytics | ❌ | ✅ | ✅ |
+| AI Recommendations | ❌ | ✅ | ✅ |
+| Content Authoring | ❌ | ✅ | ✅ |
+| Cohort Management | ❌ | ✅ | ✅ |
+| SCORM/xAPI Export | ❌ | ✅ | ✅ |
+| Role-Based Access Control | ❌ | ✅ | ✅ |
+| Single Sign-On (SSO) | ❌ | ❌ | ✅ |
+| HRIS Integration | ❌ | ❌ | ✅ |
+| White-Label Branding | ❌ | ❌ | ✅ |
+| Custom Onboarding | ❌ | ❌ | ✅ |
+| SLA Guarantee | ❌ | ❌ | ✅ |
+| Dedicated Manager | ❌ | ❌ | ✅ |
+| Gamification & Badges | ❌ | ✅ | ✅ |
+| Push Notifications | ✅ | ✅ | ✅ |
+| Email Support | ✅ | ✅ | ✅ |
+| Priority Support | ❌ | ✅ | ✅ |
+| AI Voice Narration | ❌ | ✅ | ✅ |
+
+---
+
+## 5. Admin Features
+
+**Everything the owner (super_admin) does as admin:**
+
+- **View/edit users** - List all users, search/filter by role, edit name/email/role/organization, delete users
+- **Manage user roles** - Assign roles: learner, employer_admin, content_author, super_admin
+- **User approval workflow** - Approve pending users, disapprove with reason, block users, remove users
+- **Invite team members** - Send invitations to new users with assigned role
+- **View user statistics** - Total users, users by role, users by approval status (pending/approved/disapproved/blocked/removed)
+- **View/edit lessons** - List all lessons, search/filter by status/category, publish/archive/draft, edit metadata
+- **Manage organizations** - Create organizations, list, edit organization details, assign users to orgs
+- **Manage subscription plans** - View plans, edit pricing, manage tiers, track subscription status
+- **View subscriptions** - List all active subscriptions, view billing cycles, renewal dates
+- **View payments** - Payment history, transaction status, amount, currency, payment method
+- **Verify payments** - Check payment status from Smarthinkerz, update subscription after payment
+- **View revenue analytics** - Gross revenue, OpenAI costs (15% deduction), net revenue, daily average, monthly breakdown
+- **Export revenue data** - CSV export of revenue by plan, by user, by period
+- **View audit logs** - All system actions (user creation, role changes, payments, lesson assignments) with filters
+- **Export audit logs** - CSV export of audit trail
+- **Customize branding** - Edit app name, logo, colors, fonts, theme (light/dark), footer text, feature cards, CTA buttons
+- **Configure settings** - Platform settings, feature toggles, API keys
+- **View voice cache statistics** - Voice synthesis cache usage, hit rates, storage
+- **Manage voice cache** - Clear cache, view cached lessons
+- **Export user data** - CSV export of all users with roles, organizations, status
+- **Export consent data** - GDPR consent records
+- **Export feedback** - User ratings and comments on lessons
+- **Monitor system status** - Health checks for 6 services (app server, database, email, payments, LLM, voice)
+- **View uptime history** - 7-day uptime chart with per-service metrics
+- **Send broadcast notifications** - Notify all users via email/push/in-app
+- **Manage IP allowlist** - Restrict admin access to specific IP addresses
+- **View breach events** - Failed login attempts, suspicious activity
+- **Configure webhook** - Set up webhooks for payment events, user actions
+
+---
+
+## 6. Database Tables
+
+| Table | Purpose | PII? |
+|-------|---------|------|
+| `organizations` | Company/employer accounts | No |
+| `users` | User accounts with roles, approval status | **Yes** (name, email) |
+| `shifts` | Shift schedules for each user | No |
+| `lessons` | Lesson content, metadata, status | No |
+| `lesson_assignments` | Which lessons assigned to which users | No |
+| `lesson_attempts` | User progress on lessons (completion, scores) | No |
+| `certificates` | Completion certificates | No |
+| `audit_logs` | All system actions (user, action, timestamp) | No |
+| `notifications` | Notification records (sent, read status) | No |
+| `platform_settings` | App configuration (branding, feature toggles) | No |
+| `subscription_plans` | Plan definitions (Starter, Pro, Enterprise) | No |
+| `subscriptions` | Active subscriptions per organization | No |
+| `payments` | Payment transactions, status, amounts | **Yes** (org, amount, method) |
+| `lesson_packs` | Bundled lesson collections | No |
+| `user_pack_purchases` | Purchase history of lesson packs | No |
+| `webhook_configs` | Webhook URLs for integrations | No |
+| `push_subscriptions` | Push notification subscriptions | No |
+| `voice_audio_cache` | Cached voice narration files | No |
+| `admin_ip_allowlist` | IP addresses allowed for admin access | No |
+| `consents` | GDPR consent records | **Yes** (user, consent type, timestamp) |
+| `breach_events` | Failed login attempts, security events | **Yes** (user ID, timestamp) |
+| `lesson_feedback` | User ratings and comments on lessons | No |
+| `uptime_history` | Service health metrics over time | No |
+
+**Total: 24 tables**
+
+---
+
+## 7. Background Jobs / Scheduled Tasks
+
+| Job Name | Cadence | What It Does | Tables Written To |
+|----------|---------|-------------|-------------------|
+| Auto-seed lessons | On startup (once) | Generate 125+ lessons if library empty | `lessons` |
+| Auto-seed plans | On startup (once) | Create Starter/Pro/Enterprise plans if none exist | `subscription_plans` |
+| Lesson assignment scheduler | On demand (via API) | Schedule lessons around user's shift times | `lesson_assignments` |
+| Payment verification | On demand (via webhook) | Check payment status from Smarthinkerz, update subscription | `payments`, `subscriptions` |
+| Email notifications | On demand (via tRPC) | Send payment confirmations, system alerts | (external: Resend) |
+| Voice synthesis cache | On demand (via API) | Generate and cache voice narration for lessons | `voice_audio_cache` |
+| Breach detection | On login attempt | Record failed logins, detect suspicious activity | `breach_events` |
+| Audit logging | On every action | Log user actions (create, update, delete) | `audit_logs` |
+| Uptime monitoring | Periodic (every 5 min) | Check health of 6 services, record status | `uptime_history` |
+| Offline sync | On app startup | Sync locally-completed lessons back to server | `lesson_attempts` |
+
+**Note:** No recurring cron jobs currently implemented. All jobs are event-driven or on-demand via API.
+
+---
+
+## 8. Integrations / Webhooks
+
+**Outbound (what this app POSTs to):**
+- **Smarthinkerz Tap Payments** - POST to `/api/checkout` with plan, user, quantity
+- **Resend Email API** - POST to send payment confirmations, system alerts
+- **ElevenLabs TTS API** - POST to generate voice narration for lessons
+- **Manus Forge API** - POST to generate lessons via LLM, get AI recommendations
+- **AWS S3** - PUT/GET file uploads (lesson media, user documents)
+
+**Inbound (what posts to this app):**
+- **Smarthinkerz Webhook** - Payment status updates (succeeded, failed, refunded)
+- **Manus OAuth Callback** - User authentication redirect to `/api/oauth/callback`
+
+**API keys/secrets required (names only):**
+- `OAUTH_SERVER_URL` - Manus OAuth endpoint
+- `VITE_APP_ID` - Manus OAuth app ID
+- `JWT_SECRET` - Session cookie signing key
+- `DATABASE_URL` - MySQL/TiDB connection string
+- `TAP_SECRET_KEY` - Smarthinkerz Tap secret
+- `TAP_PUBLIC_KEY` - Smarthinkerz Tap public key
+- `TAP_WEBHOOK_SECRET` - Smarthinkerz webhook verification
+- `ELEVENLABS_API_KEY` - ElevenLabs voice API key
+- `RESEND_API_KEY` - Resend email API key
+- `BUILT_IN_FORGE_API_KEY` - Manus LLM API key (server-side)
+- `BUILT_IN_FORGE_API_URL` - Manus LLM endpoint
+- `VITE_FRONTEND_FORGE_API_KEY` - Manus LLM API key (client-side)
+- `VITE_FRONTEND_FORGE_API_URL` - Manus LLM endpoint (client-side)
+- `AWS_ACCESS_KEY_ID` - AWS S3 credentials
+- `AWS_SECRET_ACCESS_KEY` - AWS S3 credentials
+- `VITE_ANALYTICS_ENDPOINT` - Analytics tracking endpoint
+- `VITE_ANALYTICS_WEBSITE_ID` - Analytics site ID
+
+---
+
+## 9. Payments
+
+**How does it take money?**
+- Per-user subscription model (monthly or annual billing)
+- Payment processing via Smarthinkerz Tap Payments gateway
+- Checkout flow: User selects plan → Quantity (number of seats) → Redirected to Smarthinkerz checkout page → Payment confirmation → Subscription activated
+
+**Plans/SKUs sold (name + price + cycle):**
+1. **Starter** - $3.95/user/month or $39.50/user/year
+2. **Pro** - $8.95/user/month or $89.50/user/year
+3. **Enterprise** - $12.00/user/month or $120.00/user/year
+
+**Where does subscription state live?**
+- `subscriptions` table (orgId, planSlug, billingCycle, status, renewalDate)
+- `payments` table (orgId, amount, status, externalChargeId, paidAt)
+
+**How is tier upgraded after payment?**
+1. User completes payment on Smarthinkerz checkout page
+2. Smarthinkerz sends webhook to `/api/webhooks/tap` with order ID
+3. App calls `subscription.verifyPayment` with order ID
+4. Payment status updated to "succeeded" in database
+5. Subscription status updated to "active"
+6. User gains access to plan features immediately
+7. Email confirmation sent via Resend
+8. Organization subscription updated with renewal date
+
+---
+
+## 10. Email / Notifications
+
+**Provider:** Resend (email), Push API (push notifications), In-app toast (UI notifications)
+
+**Email types sent:**
+- Payment confirmation (after successful payment)
+- System alerts (breach notifications, GDPR alerts, service status)
+- Onboarding welcome email (after user creation)
+- Lesson assignment notification (when lessons assigned)
+- Owner notifications (form submissions, feedback, alerts)
+
+**Who triggers them:**
+- **Payment confirmation** - Triggered by `subscription.verifyPayment` after successful payment
+- **System alerts** - Triggered by admin via `system.notifyOwner` mutation
+- **Onboarding email** - Triggered by `onboarding.submitShiftSchedule` completion
+- **Lesson assignment** - Triggered by `assignment.create` bulk endpoint
+- **Owner notifications** - Triggered by user actions (new feedback, breach detection)
+
+**Notification channels:**
+- Email (Resend API)
+- Push notifications (browser push, stored in `push_subscriptions` table)
+- In-app toast (UI notifications via Sonner library)
+- Audit logs (all actions logged for admin review)
+
+---
+
+## 11. Branding
+
+**Brand name:** Smarthinkerz LearnShift (customizable via admin CRM)
+
+**Color palette / theme:**
+- **Primary Color:** #14b8a6 (teal)
+- **Accent Color:** #0d9488 (darker teal)
+- **Background:** Dark theme (dark gray/charcoal)
+- **Text:** Light gray/white
+- **Theme Toggle:** Light/dark mode available
+
+**Does it share Smarthinkerz branding?** Yes - currently uses Smarthinkerz logo, colors, and branding
+
+**Public domain (if any):** None yet (using Manus WebDev domain: 3000-il0yqsuee3zhylh29vky5-3d367bd3.us1.manus.computer)
+
+**Customizable branding elements (via admin CRM):**
+- App name
+- Logo URL
+- Favicon URL
+- Primary & accent colors
+- Font family (7 options)
+- Theme (light/dark)
+- Footer text
+- Hero tagline & subtitle
+- Feature card titles & descriptions
+- CTA button text & links
+- Custom CSS overrides
+
+---
+
+## 12. What's Broken / Blocked / On the Wishlist
+
+**Known bugs:**
+1. **Branding changes not applied to frontend** - Admin can edit branding in CRM but changes don't appear on home page (backend saves correctly, frontend not integrated)
+2. **Footer customization not working** - Footer text editable in CRM but hardcoded in Home.tsx
+3. **Revenue export not implemented** - Export CSV button shows "coming soon" toast
+4. **User invitation UI missing** - Backend supports invitations but no frontend form
+5. **User approval/blocking UI missing** - Backend supports full user lifecycle but frontend only shows edit/delete
+6. **Revenue queries hardcoded to orgId 1** - Should be dynamic based on selected organization
+
+**External blockers:**
+- Smarthinkerz Tap Payments endpoint returns 404 in test environment (expected - proxy not available)
+- ElevenLabs API key validation shows 401 in tests (exp
+(Content truncated due to size limit. Use line ranges to read remaining content)

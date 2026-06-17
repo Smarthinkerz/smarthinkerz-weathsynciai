@@ -1,0 +1,105 @@
+Basic Plan (For Small Businesses & Startups)
+✅ Company Profile Creation
+
+Add business name, logo, description, and contact details.
+
+List up to 5 services offered.
+
+Display website and social media links.
+
+✅ Business Directory Listing
+
+Listed in the global company directory (basic visibility).
+
+Searchable by users based on location and service category.
+
+✅ AI Chatbot for Customer Inquiries
+
+Limited AI chatbot with preset responses for FAQs.
+
+Up to 50 chatbot interactions per month.
+
+✅ Client Booking & Requests
+
+Receive direct hiring requests from users.
+
+Respond to client inquiries manually.
+
+✅ Analytics Dashboard (Limited)
+
+View basic engagement insights (e.g., profile views, inquiries).
+
+✅ Skill & Service Verification
+
+Upload business licenses & certifications.
+
+Up to 2 employee skill verifications.
+
+✅ Access to AI-Powered Market Insights
+
+Limited access to market trends & industry insights.
+
+✅ Standard Support
+
+Email support (48-hour response time).
+
+💰 Pricing: Affordable entry-level monthly fee.
+
+Premium Plan (For Established Companies & Enterprises)
+🚀 All Basic Plan Features PLUS:
+
+🔥 Enhanced Company Profile
+
+List unlimited services.
+
+Add a promotional video.
+
+Premium placement in the directory (higher visibility).
+
+🔥 AI-Powered Customer Engagement
+
+Advanced AI chatbot that responds dynamically to customer questions.
+
+Unlimited chatbot interactions per month.
+
+🔥 Interactive Global Business Map
+
+Company location displayed on interactive AI-driven business map.
+
+Real-time market trends integrated into map data.
+
+🔥 Lead Generation & Smart Negotiation
+
+AI negotiates pricing & terms with potential clients on your behalf.
+
+AI-driven client matching based on industry and budget.
+
+🔥 Advanced Analytics Dashboard
+
+Detailed customer insights (engagement rates, service demand).
+
+AI-powered business growth recommendations.
+
+🔥 Skill & Service Verification
+
+Upload unlimited employee certifications & references.
+
+LinkedIn & website verification for added credibility.
+
+🔥 Exclusive Access to AI Market Intelligence
+
+Predictive analytics for future market trends.
+
+Industry benchmarking against competitors.
+
+🔥 Automated Client Booking & Contracts
+
+AI-assisted contract creation & signing.
+
+Integrated secure payment processing.
+
+🔥 Priority Support
+
+24/7 live chat & priority email support.
+
+💰 Pricing: Higher monthly fee, tailored for high-growth businesses.

@@ -1,0 +1,80 @@
+[vite] connecting...
+[vite] connected.
+i18next: languageChanged en
+i18next: initialized 
+Object {debug: true, initAsync: true, ns: Array(1), defaultNS: Array(1), fallbackLng: Array(1), …}
+i18n initialized with language: en
+Making query request to /api/user
+i18next::translator: missingKey en translation opportunities opportunities
+Fetching funding opportunities: 
+Object {url: "/api/funding-opportunities", selectedCountry: null}
+Making query request to /api/opportunities
+Making query request to /api/opportunities/recommended
+No recommendations found despite user having skills
+User skills: 
+(4) ["web developer", "business development", "VR & AR Content Creation", "digital marketing manager"]
+User assets: 
+(5) ["computer", "car", "tech", "tech", "tech"]
+Available opportunities: 
+Array []
+Recommendations Error: null
+i18next::translator: missingKey en translation opportunities opportunities
+No recommendations found despite user having skills
+User skills: 
+(4) ["web developer", "business development", "VR & AR Content Creation", "digital marketing manager"]
+User assets: 
+(5) ["computer", "car", "tech", "tech", "tech"]
+Available opportunities: 
+(18) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+Recommendations Error: null
+Received opportunities: 
+Object {count: 14, selectedCountry: null, sample: {…}}
+i18next::translator: missingKey en translation opportunities opportunities
+Detected country: Oman
+Setting country and region: 
+Object {country: "Oman", region: "Middle East"}
+i18next::translator: missingKey en translation opportunities opportunities
+[KnowledgeGraph] Fetching data: 
+Object {industry: "Technology", region: "Middle East", selectedCountry: "Oman"}
+[KnowledgeGraph] Received data: 
+Object {revenue: 198955657.96171185, marketShare: 25.51854475866465, growthRate: 3.415188585526656, competitors: Array(3), marketSize: 752424413.7072301, …}
+Warning: validateDOMNesting(...): <div> cannot appear as a descendant of &lt;p&gt;.
+    at div
+    at div
+    at p
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:201:13
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:1342:13
+    at _c9 (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/components/ui/dialog.tsx:181:12)
+    at div
+    at DialogHeader (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/components/ui/dialog.tsx:106:3)
+    at div
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:201:13
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:230:7
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:123:11
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:104:11
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:201:13
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:429:5
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:1294:13
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:1217:58
+    at Presence (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:650:11)
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:1208:64
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:123:11
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:104:11
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:201:13
+    at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:632:22
+    at Presence (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:650:11)
+    at Provider (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-JJS7DLG7.js?v=572d140c:38:15)
+    at DialogPortal (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:1171:11)
+    at _c3 (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/components/ui/dialog.tsx:51:12)
+    at Provider (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-JJS7DLG7.js?v=572d140c:38:15)
+    at Dialog (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-J3HGL6AD.js?v=572d140c:1112:5)
+    at div
+    at FundingOpportunities (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/components/funding-opportunities.tsx:35:40)
+    at div
+    at div
+    at div
+    at Dashboard (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/pages/dashboard.tsx:109:36)
+    at ProtectedRoute (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/lib/protected-route.tsx:22:3)
+    at Switch (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=572d140c:379:17)
+    at Router
+    at AppContent…

@@ -1,0 +1,3 @@
+- [WealthSync finance-AI integrity](wealthsync-integrity.md) — which scores are AI-generated vs computed; honesty rules for disclaimers, AI-estimate badges, and verification status.
+- [WealthSync computation engine](wealthsync-computation-engine.md) — LLM-free server/engine for (A) numbers; no-LLM test guard, insufficient-data honesty, cross-asset date-alignment gotcha for beta.
+- [WealthSync dev/ops gotchas](wealthsync-dev-ops.md) — dev server is `tsx` (no watch) so server edits need a workflow restart; business_locations has no owner column (enforce tenant isolation in routes); never return API keys to the browser.

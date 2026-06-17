@@ -1,0 +1,107 @@
+1. Replacing eval() Safely:
+❌ Insecure Code:
+
+js
+Copy
+Edit
+const code = "console.log('Hello, World!')";
+eval(code);
+✅ Secure Alternative:
+
+js
+Copy
+Edit
+const code = () => console.log('Hello, World!');
+code();
+Or if you need to execute dynamic code:
+
+Use an object with functions instead of raw strings.
+js
+Copy
+Edit
+const actions = {
+  greet: () => console.log('Hello, World!'),
+  farewell: () => console.log('Goodbye, World!')
+};
+actions['greet']();  // Safely executes the function
+⏲️ 2. Replacing setTimeout("string") and setInterval("string"):
+❌ Insecure Code:
+
+js
+Copy
+Edit
+setTimeout("alert('Hi!')", 1000);
+✅ Secure Alternative:
+
+js
+Copy
+Edit
+setTimeout(() => alert('Hi!'), 1000);
+Another example for setInterval:
+
+js
+Copy
+Edit
+setInterval(() => console.log('Repeating task'), 2000);
+📦 3. Replacing new Function() with Arrow Functions:
+❌ Insecure Code:
+
+js
+Copy
+Edit
+const sum = new Function("a", "b", "return a + b;");
+console.log(sum(2, 3));
+✅ Secure Alternative:
+
+js
+Copy
+Edit
+const sum = (a, b) => a + b;
+console.log(sum(2, 3));
+🛠️ 4. Handling Dynamic Function Calls Safely:
+If you need to call functions dynamically based on strings:
+
+❌ Insecure Code:
+
+js
+Copy
+Edit
+const funcName = "sayHello";
+window[funcName]();  // If sayHello is defined globally
+✅ Secure Alternative:
+
+Use an object to store functions:
+js
+Copy
+Edit
+const functions = {
+  sayHello: () => console.log('Hello!'),
+  sayGoodbye: () => console.log('Goodbye!')
+};
+
+const funcName = "sayHello";
+functions[funcName]?.();  // Safely calls sayHello if it exists
+🔄 5. Replacing innerHTML with textContent for Security:
+❌ Insecure Code:
+
+js
+Copy
+Edit
+document.getElementById("message").innerHTML = userInput;  // Risky if userInput has scripts
+✅ Secure Alternative:
+
+js
+Copy
+Edit
+document.getElementById("message").textContent = userInput;
+📋 6. Example of Secure CSP Settings (if you need them):
+Minimal CSP Header (without unsafe-eval):
+
+html
+Copy
+Edit
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; object-src 'none';">
+🔄 Summary:
+Replace insecure methods like eval() and new Function() with arrow functions or function objects.
+Use safe event handling with addEventListener instead of onclick attributes.
+Avoid unsafe-eval in your CSP to maintain security.

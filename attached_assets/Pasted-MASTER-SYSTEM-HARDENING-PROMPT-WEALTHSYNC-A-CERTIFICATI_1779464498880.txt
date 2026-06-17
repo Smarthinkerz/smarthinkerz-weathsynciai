@@ -1,0 +1,515 @@
+MASTER SYSTEM HARDENING PROMPT — WEALTHSYNC A+ CERTIFICATION
+
+Role:
+
+You are operating as:
+
+Principal Software Architect
+Principal TypeScript Engineer
+Senior DevOps Engineer
+Staff Platform Reliability Engineer
+Senior Security Engineer
+
+Mission:
+
+Elevate WealthSync from ~93% production readiness to enterprise-grade A+ (100/100).
+
+Current runtime health is stable.
+
+Do NOT redesign working systems.
+
+Preserve all existing functionality.
+
+Primary objective:
+
+Eliminate technical debt.
+
+Eliminate drift.
+
+Eliminate hidden failure paths.
+
+Achieve:
+
+Zero ghost APIs
+Zero TypeScript compile failures
+Fully reproducible deployments
+CI-enforced quality gates
+Production observability completeness
+Resilience under scale
+Enterprise SaaS deployment standards
+
+NON-NEGOTIABLE RULES
+
+No mock implementations
+No placeholder routes
+No dead code
+No runtime regressions
+No duplicated endpoint aliases unless intentional
+Strong typing everywhere
+No any
+No unsafe unknown
+No ignored TypeScript errors
+No schema drift
+
+PHASE 1 — ELIMINATE GHOST ENDPOINTS
+
+Audit frontend.
+
+Search entire repository.
+
+Find references:
+
+Missing endpoints:
+
+/api/opportunities/saved
+/api/ai/agents
+/api/integration-status
+/api/integration/status
+
+For each endpoint:
+
+Decision tree:
+
+IF frontend requires endpoint:
+
+→ Implement production route
+
+ELSE:
+
+→ Remove frontend usage
+
+Requirements:
+
+No frontend may call nonexistent APIs.
+
+Add endpoint contract verification tests.
+
+Add route registry validation.
+
+Deliver:
+
+24 / 24 API probe success.
+
+PHASE 2 — TYPE CLEANLINESS (CRITICAL)
+
+Current:
+
+435 TypeScript errors.
+
+Goal:
+
+Run:
+
+tsc --noEmit
+
+Fix categories:
+
+Drizzle schema mismatches
+
+Fix:
+
+date/string mismatches
+insert typing failures
+nullable handling
+fetch().json()
+
+Replace unsafe patterns:
+
+BAD:
+
+const data = await response.json()
+
+GOOD:
+
+Use Zod validation.
+
+Example pattern:
+
+const schema = z.object({...})
+
+const data = schema.parse(await response.json())
+
+Unknown JSON columns
+
+Replace:
+
+unknown
+
+With:
+
+Explicit interfaces.
+
+Remove:
+implicit any
+ts-ignore
+non-null assertions unless justified
+
+Priority files:
+
+server/routes.ts
+
+server/services/live-market-data.ts
+
+server/services/premium-market-data.ts
+
+client/src/pages/company-verification.tsx
+
+server/services/deep-research-service.ts
+
+server/routes/company-features.ts
+
+client/src/services/economic-data-service.ts
+
+server/services/enhanced-lead-generation-service.ts
+
+Requirements:
+
+Strict TypeScript.
+
+Enable:
+
+strict:true
+
+noImplicitAny:true
+
+exactOptionalPropertyTypes:true
+
+noUncheckedIndexedAccess:true
+
+Target:
+
+0 compiler errors.
+
+PHASE 3 — DATABASE DEPLOYMENT REPRODUCIBILITY
+
+Current issue:
+
+Live schema differs from committed migration history.
+
+Required:
+
+Generate migration:
+
+invoices_external_id_unique
+
+Requirements:
+
+Migration must:
+
+succeed from empty database
+succeed from production snapshot
+support rollback
+
+Validate:
+
+Migration checksum.
+
+Prevent schema drift.
+
+Deliver:
+
+Production database becomes fully reproducible.
+
+PHASE 4 — CI/CD QUALITY GATES
+
+Build mandatory pipeline:
+
+Pipeline order:
+
+Step 1:
+
+Lint
+
+Step 2:
+
+Type check
+
+tsc --noEmit
+
+Step 3:
+
+Unit tests
+
+Step 4:
+
+Integration tests
+
+Step 5:
+
+API smoke tests
+
+Required smoke tests:
+
+/api/health
+
+Authentication flow
+
+Stripe integration
+
+Tap Payments
+
+Database connection
+
+Critical APIs
+
+Step 6:
+
+Build validation
+
+Step 7:
+
+Deployment approval
+
+Rules:
+
+Fail pipeline on ANY failure.
+
+No deployment bypass.
+
+PHASE 5 — API CONTRACT VALIDATION
+
+Implement contract verification.
+
+Requirements:
+
+Every endpoint must validate:
+
+Request schema.
+
+Response schema.
+
+Use:
+
+Zod.
+
+Pattern:
+
+Input validation.
+
+Output validation.
+
+Standardized error responses:
+
+400
+
+401
+
+403
+
+404
+
+429
+
+500
+
+Requirements:
+
+No untyped API payloads.
+
+PHASE 6 — FUNDING UX IMPROVEMENT
+
+Current issue:
+
+Zero-match users receive empty state.
+
+Requirement:
+
+If match score == 0:
+
+Return:
+
+Top 5 opportunities.
+
+Display:
+
+"Complete your profile to personalize funding recommendations."
+
+Requirements:
+
+Never display dead-end UX.
+
+Track:
+
+Empty-state analytics.
+
+PHASE 7 — OBSERVABILITY HARDENING
+
+Implement:
+
+Metrics:
+
+API latency p50
+API latency p95
+DB latency
+OpenAI latency
+Stripe latency
+Tap latency
+cache hit rate
+auth failures
+
+Logging:
+
+Structured JSON logs.
+
+Correlation IDs.
+
+Request tracing.
+
+Health checks:
+
+Add:
+
+/api/system-health
+
+Must validate:
+
+Database.
+
+External providers.
+
+Queue health.
+
+Memory usage.
+
+Disk usage.
+
+Environment validation.
+
+PHASE 8 — SECURITY HARDENING
+
+Current security strong.
+
+Push to A+.
+
+Add:
+
+Dependency scanning.
+
+CSP tightening.
+
+JWT rotation validation.
+
+Session fixation protection.
+
+Security headers audit.
+
+CSRF validation tests.
+
+Secrets validation at boot.
+
+Rate limit verification tests.
+
+Requirements:
+
+OWASP Top 10 coverage.
+
+Security regression tests.
+
+PHASE 9 — SOCIAL + SEO RELIABILITY
+
+Validate:
+
+OG image deployed correctly.
+
+Validate:
+
+Open Graph:
+
+title
+
+description
+
+image
+
+Twitter cards.
+
+Requirements:
+
+Social previews must render correctly.
+
+PHASE 10 — PERFORMANCE CERTIFICATION
+
+Targets:
+
+Public page load:
+
+<100ms server render
+
+API p95:
+
+<200ms
+
+Health endpoint:
+
+<50ms
+
+DB:
+
+<50ms
+
+Frontend:
+
+Lighthouse:
+
+Performance >95
+
+Accessibility >95
+
+SEO >95
+
+Best Practices >95
+
+CLS <0.1
+
+LCP <2s
+
+INP <200ms
+
+PHASE 11 — PREVENT FUTURE DRIFT
+
+Build automated repository guardrails.
+
+Add:
+
+Route registry validator.
+
+Schema drift validator.
+
+Unused endpoint detection.
+
+Unused component detection.
+
+Dead import detection.
+
+Duplicate route detection.
+
+Requirements:
+
+Technical debt cannot silently reappear.
+
+FINAL DELIVERABLE
+
+Produce final report:
+
+TypeScript errors before vs after
+Ghost endpoints fixed
+Migration files added
+CI/CD protections added
+Security improvements
+Performance improvements
+Remaining risks
+Final readiness score
+
+Success criteria:
+
+100%
+
+Zero TS errors.
+
+Zero ghost endpoints.
+
+Fully reproducible deploys.
+
+Enterprise-grade reliability.
+
+Do not stop until all targets are achieved.

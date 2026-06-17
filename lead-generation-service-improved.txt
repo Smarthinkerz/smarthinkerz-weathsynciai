@@ -1,0 +1,267 @@
+/**
+ * Here's an improved lead generation service that will use the validated API approaches
+ * 
+ * Once the test script confirms which APIs work best with your keys, you can replace
+ * the current implementation with this one, updating any specifics based on the test results.
+ */
+
+// Inside generateLinkedInLeads method
+
+/**
+ * Generate leads from LinkedIn using RapidAPI LinkedIn Scraper
+ */
+private async generateLinkedInLeads(request: LeadGenerationRequest): Promise<Lead[]> {
+  if (!this.RAPID_API_KEY) {
+    console.error('RAPID_API_KEY is not set for LinkedIn Scraper');
+    return [];
+  }
+  
+  const searchTerms = this.createSearchTerms(request);
+  const locationName = request.city ? `${request.city}, ${request.country}` : request.country;
+  
+  try {
+    console.log('Using RapidAPI LinkedIn Scraper for lead generation');
+    console.log('Search terms:', searchTerms[0]);
+    console.log('Location:', locationName);
+    
+    // First try the LinkedIn Search API to find profiles
+    const searchUrl = `https://linkedin-profiles-and-company-data.p.rapidapi.com/linkedin-search?keyword=${encodeURIComponent(searchTerms[0])}&search_type=people&location=${encodeURIComponent(locationName)}&start=0&limit=10`;
+    
+    const searchResponse = await fetch(searchUrl, {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': this.RAPID_API_KEY,
+        'X-RapidAPI-Host': 'linkedin-profiles-and-company-data.p.rapidapi.com'
+      }
+    });
+    
+    console.log(`LinkedIn API search status code: ${searchResponse.status} ${searchResponse.statusText}`);
+    
+    if (!searchResponse.ok) {
+      console.error(`LinkedIn API search error: ${searchResponse.status}`);
+      return [];
+    }
+    
+    const searchData = await searchResponse.json();
+    
+    if (!searchData.data || searchData.data.length === 0) {
+      console.log('No LinkedIn profiles found in search');
+      return [];
+    }
+    
+    console.log(`Found ${searchData.data.length} LinkedIn profiles`);
+    
+    // For each profile in the search results, get more details
+    const leads: Lead[] = [];
+    
+    for (const profile of searchData.data) {
+      try {
+        if (!profile.public_id) continue;
+        
+        // Get detailed profile information
+        const profileUrl = `https://linkedin-profiles-and-company-data.p.rapidapi.com/profile-details?public_id=${profile.public_id}`;
+        
+        const profileResponse = await fetch(profileUrl, {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': this.RAPID_API_KEY,
+            'X-RapidAPI-Host': 'linkedin-profiles-and-company-data.p.rapidapi.com'
+          }
+        });
+        
+        if (!profileResponse.ok) {
+          console.warn(`Could not fetch details for profile ${profile.public_id}`);
+          continue;
+        }
+        
+        const profileData = await profileResponse.json();
+        
+        // Map the profile data to a lead
+        const lead = this.mapLinkedInProfileToLead(profileData, request);
+        leads.push(lead);
+        
+      } catch (profileError) {
+        console.error('Error getting profile details:', profileError);
+      }
+    }
+    
+    return leads;
+  } catch (error) {
+    console.error('Error generating LinkedIn leads:', error);
+    return [];
+  }
+}
+
+/**
+ * Map a LinkedIn profile to a lead
+ */
+private mapLinkedInProfileToLead(profileData: any, request: LeadGenerationRequest): Lead {
+  // Extract core information
+  let name = profileData.full_name || 'Unknown';
+  let position = profileData.headline || 'Unknown';
+  
+  // Get current company information
+  let company = 'Unknown';
+  let companyUrl = '';
+  
+  if (profileData.experiences && profileData.experiences.length > 0) {
+    // Sort experiences to find the current one (no end date)
+    const currentExperience = profileData.experiences.find((exp: any) => !exp.ends_at || exp.ends_at === 'Present');
+    
+    if (currentExperience) {
+      company = currentExperience.company || 'Unknown';
+      // Use company URL if available
+      if (currentExperience.company_linkedin_profile_url) {
+        companyUrl = currentExperience.company_linkedin_profile_url;
+      }
+    }
+  }
+  
+  // Get location
+  let location = profileData.location_name || request.country;
+  
+  // Get profile URL
+  const profileUrl = profileData.profile_url || '';
+  
+  // Generate email (this would be improved with real email discovery in production)
+  const firstName = name.split(' ')[0].toLowerCase();
+  const companySlug = company.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const email = `${firstName}@${companySlug || 'company'}.com`;
+  
+  // Create summary from about section or headline
+  let summary = '';
+  if (profileData.about) {
+    summary = profileData.about.substring(0, 200) + (profileData.about.length > 200 ? '...' : '');
+  } else if (profileData.headline) {
+    summary = profileData.headline;
+  }
+  
+  // Generate a score based on relevance to search criteria
+  let score = 70; // Base score
+  
+  // Increase score if industry matches
+  if (profileData.industry && profileData.industry.toLowerCase().includes(request.industry.toLowerCase())) {
+    score += 15;
+  }
+  
+  // Increase score if position includes decision-maker terms
+  const decisionMakerTerms = ['CEO', 'Chief', 'Director', 'VP', 'Head', 'Manager', 'President', 'Founder'];
+  if (decisionMakerTerms.some(term => position.includes(term))) {
+    score += 10;
+  }
+  
+  // Create the lead object
+  return {
+    id: parseInt(uuidv4().replace(/[^0-9]/g, '').substring(0, 6)),
+    name,
+    company,
+    position,
+    email,
+    phone: 'Contact via LinkedIn',
+    industry: request.industry,
+    score,
+    status: 'New',
+    notes: `Found via LinkedIn.\n${summary}`,
+    lastContact: 'Never',
+    source: 'LinkedIn',
+    location,
+    profileUrl,
+  };
+}
+
+/**
+ * Generate leads from web search using multiple search engines
+ */
+private async generateWebSearchLeads(request: LeadGenerationRequest): Promise<Lead[]> {
+  if (!this.RAPID_API_KEY) {
+    console.error('RAPID_API_KEY is not set for web search');
+    return [];
+  }
+  
+  // Create search parameters
+  const countryCode = this.getCountryCode(request.country);
+  const searchQuery = `${request.industry} companies ${request.targetMarket} ${request.country} ${request.city || ''}`;
+  
+  console.log('Web search query:', searchQuery);
+  
+  try {
+    // Use the real-time web search API
+    const response = await fetch('https://real-time-web-search.p.rapidapi.com/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RapidAPI-Key': this.RAPID_API_KEY,
+        'X-RapidAPI-Host': 'real-time-web-search.p.rapidapi.com'
+      },
+      body: JSON.stringify({
+        text: searchQuery,
+        safesearch: 'off',
+        max_results: 25
+      })
+    });
+    
+    if (!response.ok) {
+      console.warn(`Web search API returned status ${response.status}: ${response.statusText}`);
+      return [];
+    }
+    
+    const data = await response.json();
+    
+    // Extract company information from search results
+    const results = data.data || [];
+    const leads: Lead[] = [];
+    
+    for (const result of results) {
+      // Skip results that don't look like company websites
+      if (!result.title || !result.link) {
+        continue;
+      }
+      
+      // Skip social media and generic sites
+      if (
+        result.link.includes('facebook.com') ||
+        result.link.includes('twitter.com') ||
+        result.link.includes('instagram.com') ||
+        result.link.includes('youtube.com') ||
+        result.link.includes('wikipedia.org') ||
+        result.link.includes('amazon.com')
+      ) {
+        continue;
+      }
+      
+      // Extract company information
+      const companyName = this.extractCompanyName(result.title);
+      if (!companyName) continue;
+      
+      // Create potential contact information
+      const domainParts = new URL(result.link).hostname.split('.');
+      const domain = domainParts.slice(-2).join('.');
+      
+      // Create position based on the lead type
+      const position = this.getPositionFromLeadType(request.leadType).split(' ')[0];
+      
+      // Add the lead
+      leads.push({
+        id: parseInt(uuidv4().replace(/[^0-9]/g, '').substring(0, 6)),
+        name: `Contact at ${companyName}`,
+        company: companyName,
+        position: position,
+        email: `contact@${new URL(result.link).hostname}`,
+        phone: 'See company website',
+        industry: request.industry,
+        score: 65 + Math.floor(Math.random() * 15), // 65-80 score range
+        status: 'New',
+        notes: `Found via web search.\n${result.snippet || ''}`,
+        lastContact: 'Never',
+        source: 'Web Search',
+        location: request.city ? `${request.city}, ${request.country}` : request.country,
+        profileUrl: result.link,
+      });
+    }
+    
+    return leads;
+  } catch (error) {
+    console.error('Error with web search API:', error);
+    return [];
+  }
+}

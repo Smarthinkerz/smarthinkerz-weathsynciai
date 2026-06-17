@@ -1,0 +1,64 @@
+Objective: Raise System Health Score to 100/100 by resolving all critical, important, and minor issues flagged in the audit.
+
+Action Plan:
+
+Secrets & API Keys
+
+Add and verify MAPBOX_TOKEN for Business Map rendering.
+
+Add and verify RAPIDAPI_KEY for LinkedIn scraping in lead generation.
+
+Upgrade You.com API plan to remove 403 restriction.
+
+API Endpoints
+
+Align endpoint paths with documentation:
+
+/api/finnhub/news → alias /api/finnhub/market-news
+
+/api/world-bank/GDP/USA → adjust path pattern
+
+/api/create-subscription → alias /api/checkout-session
+
+/api/subscription-plans → backend handler, not just frontend
+
+/api/ai-agent → alias /api/agents/investment-strategist
+
+Ensure all 22 tested endpoints return expected codes.
+
+Database Enhancements
+
+Seed notifications table with triggers (welcome message, funding match alerts).
+
+Populate companies with verified status (not just “pending”).
+
+Add sample records for company_services, company_reviews, smart_contracts to validate schema.
+
+Frontend Improvements
+
+Replace minimal login card landing page with a full marketing page (features, pricing, value proposition).
+
+Update Browserslist (npx update-browserslist-db).
+
+Remove duplicate “Start Server” workflow to avoid cosmetic port conflict.
+
+Security & UX
+
+Add notification triggers for signup, funding matches, and system events.
+
+Confirm all premium AI agents handle edge cases gracefully.
+
+Maintain bcrypt 12 rounds and secure cookie sessions.
+
+Goal: Achieve 100/100 System Health Score for WealthSync.
+
+Tasks:
+- Set MAPBOX_TOKEN and RAPIDAPI_KEY secrets.
+- Upgrade You.com API plan to remove 403 fallback.
+- Fix API path mismatches: add aliases for market-news, world-bank GDP, subscription, and ai-agent routes.
+- Seed notifications table with triggers (signup, funding matches).
+- Verify companies table entries (mark verified).
+- Populate empty tables with sample records (services, reviews, contracts).
+- Replace login-only landing page with full marketing site.
+- Update Browserslist and remove duplicate "Start Server" workflow.
+- Confirm all endpoints return expected codes and premium AI agents are wired correctly.

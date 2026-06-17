@@ -1,0 +1,32 @@
+Received services data: 
+Object {services: Array(5), limits: {…}}
+Making GET request to /api/company/directory-listing
+Making POST request to /api/company/directory-listing
+Making query request to /api/company/services
+Services data status: 
+Object {isLoading: true, hasError: false, hasData: false, serviceCount: 0}
+Services data status: 
+Object {isLoading: false, hasError: false, hasData: true, serviceCount: 5}
+Received services data: 
+Object {services: Array(5), limits: {…}}
+Making POST request to /api/virtual-assistant/advanced-chat
+Making query request to /api/company/services
+Services data status: 
+Object {isLoading: true, hasError: false, hasData: false, serviceCount: 0}
+Making query request to /api/business-map/locations/company
+Query request failed: 
+Error {}
+
+Making POST request to /api/business-map/locations
+API request failed: 
+Error {}
+message: "400: {"error":"Invalid location data","details":{"_errors":[],"website":{"_errors":["Invalid website URL"]}}}"
+stack: "Error: 400: {"error":"Invalid location data","details":{"_errors":[],"website":{"_errors":["Invalid website URL"]}}}↵ at throwIfResNotOk (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/lib/queryClient.ts:5:11)↵ at async apiRequest (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/lib/queryClient.ts:31:5)↵ at async Object.mutationFn (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/components/business-map/location-management.tsx:59:24)"
+get stack: ƒ ()
+set stack: ƒ ()
+[[Prototype]]: Object
+
+at t.value (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400

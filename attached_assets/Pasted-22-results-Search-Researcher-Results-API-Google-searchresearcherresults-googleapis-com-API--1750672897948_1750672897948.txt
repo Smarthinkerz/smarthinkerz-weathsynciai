@@ -1,0 +1,110 @@
+22 results
+
+Search Researcher Results API
+Google
+searchresearcherresults.googleapis.com API.
+
+
+Cloud Search API
+Google Enterprise API 
+Cloud Search provides cloud-based search capabilities over Google Workspace data. The Cloud Search API allows indexing of non-Google Workspace data into Cloud Search.
+
+
+Vertex AI Search for commerce API
+Google Enterprise API 
+Vertex AI Search for commerce API is made up of Retail Search, Browse and Recommendations. These discovery AI solutions help you implement personalized search, browse and recommendations, based on machine learning models, across your websites and mobile applications.
+
+
+Google Search Console API
+Google
+The Search Console API provides access to both Search Console data (verified users only) and to public information on an URL basis (anyone)
+
+
+Search Ads 360 Reporting API
+Google
+Report your advertising data in Search Ads 360 (for example, campaigns, ad groups, keywords, and conversions).
+
+
+Web Search Indexing API
+Google
+Notifies Google Web Search when your web pages change.
+
+
+Knowledge Graph Search API
+Google
+Searches the Google Knowledge Graph for entities.
+
+
+Custom Search API
+Google
+The JSON Custom Search API lets you develop websites and applications to retrieve and display search results from Google Custom Search programmatically. With this API, you can use RESTful requests to get either web search or image search results in JSON format.
+
+
+Programmable Search Element Paid API
+Google
+Used for quota management and billing of Programmable Search Element queries
+
+
+Video Search API
+Google
+Video Content Manage Service provides capability of managing annotations (user generated or ML generated), via operations including Add, Update, Delete, Export, etc. Video Search Service provides capability of searching video segments managed in Video Content Manage Service.
+
+
+Search Ads 360 API
+Google
+Report and modify your advertising data in Search Ads 360 (for example, campaigns, ad groups, keywords, and conversions).
+
+
+Google Vault API
+Google Enterprise API 
+Manage data and eDiscovery for your organization's data in supported Google Workspace services.
+
+
+Places API (New)
+Google Enterprise API 
+The new version of the Google Places API gives you access to more than 200 million businesses and points of interest, including an expanded list of place details and types. Show users new place attributes such real-time data for EV charging stations, wheelchair accessible establishments, and whether a restaurant allows dogs. Updates also include an enhanced search experience, modern security with OAuth-based authentication, and simplifications to pricing. Text search : Search for place information based on a text string. Nearby search : Search for matching place types within a specified area. Place details : Return detailed information about a specific place, including user reviews. Place photo : Return the most relevant photos for a place from Google users and business owners.
+
+
+Google Drive API
+Google Enterprise API 
+With the Google Drive API, you can access resources from Google Drive to create files, manage file sharing, search for files and folders, and more.
+
+
+Cloud Talent Solution API
+Google Enterprise API 
+Cloud Talent Solution provides the capability to create, read, update, and delete job postings, as well as search jobs based on keywords and filters.
+
+
+Google Cloud Data Catalog API
+Google Enterprise API 
+Data Catalog allows you to discover, manage, and understand data assets across Google Cloud Platform. Data Catalog API natively indexes Cloud BigQuery, Cloud Storage, and Cloud Pub/Sub data assets. The Data Catalog API can be used to: Search for data assets across different projects and GCP resources Create tags and tag templates to add structured business metadata unique to your organization Automate the tagging process of data assets as part of a data ingestion pipeline
+
+
+Google Partners API
+Google
+Lets advertisers search certified companies and create contact leads with them, and also audits the usage of clients.
+
+
+Places API
+Google Enterprise API 
+Get data from the same database used by Google Maps. Places features over 100 million businesses and points of interest that are updated frequently through owner-verified listings and user-moderated contributions. Place search Return a list of places based on a user’s location or search string. Place details Return detailed information about a specific place, including user reviews. Place autocomplete can be used to automatically fill in the name and/or address of a place as you type. Query autocomplete can be used to provide a query prediction service for text-based geographic searches, by returning suggested queries as you type. Place photos gives you access to the millions of Place related photos stored in Google's Place database. Places SDK for Android and Places SDK for iOS allow you to build location-aware apps that respond contextually to the local businesses and other places near the device.
+
+
+Places Aggregate API
+Google Enterprise API 
+The Places Aggregate API empowers developers to uncover location-based insights, answering questions like "How many 5-star rated, inexpensive restaurants are within a 5km radius?" Focus on a specific area to analyze place types, open/closed status, price level, and density/distribution of different places. Get results as aggregated counts or detailed place IDs.
+
+
+Cloud Domains API
+Google
+Cloud Domains enables users to search, register and manage domain names with Google Cloud. Configuring Google Cloud services for use with your domain has never been easier. Manage your domains with Cloud Billing and Cloud IAM and with any of the standard Google Cloud tools (web UI, gcloud CLI, REST API) or use domains.google.com.
+
+
+Poly API
+Google
+With the Poly API, you can access Google's growing collection of creative commons 3D assets and interact directly with poly.google.com to search, download, and import objects dynamically across desktop, mobile, virtual reality, and augmented reality. You can find all types of assets for your applications, and easily search for them by keyword, category, format, popularity or date uploaded. You can even filter by model complexity, or give people a personalized experience by letting them sign into your app with their Google account to access any assets they’ve uploaded or liked on Poly. If you'd like your application to upload 3D assets to Poly, you can request to be whitelisted for this access. Third-party assets available through the Poly API are licensed through the Creative Commons license. When using any third-party assets in your project, you are required to give proper attribution. For more information about licensing, refer to https://developers.google.com/poly/develop#licensing . By using the API, you agree to use assets in compliance with their licensing requirements.
+
+
+Document AI Warehouse
+Google
+Document AI Warehouse is an AI-first end-to-end document management platform that allows you to store, search, and manage your documents in GCP.

@@ -1,0 +1,53 @@
+ROLE
+Senior engineer. The historical-price engine works, but on the free Alpha Vantage key it
+uses RAW (unadjusted) close prices. Raw prices create phantom single-day returns on
+split/dividend dates (a 4-for-1 split looks like a -75% day), which silently corrupts
+volatility, max drawdown, beta, and Sharpe for any stock with a corporate action in the
+window. Add a guard so these metrics can never be silently wrong, and confirm the
+adjusted-data upgrade path. Keep every existing honesty guarantee.
+
+HARD CONSTRAINTS
+- Engine stays LLM-free; the no-AI guard test must still pass. No AI produces any number.
+- Never silently emit a corrupted number. When the data basis can't support a trustworthy
+  metric, say so — same philosophy as "insufficient data."
+- Provenance labels stay accurate (raw vs adjusted must be truthful).
+
+TASK 1 — CORPORATE-ACTION JUMP GUARD (for the raw-price path)
+In the risk engine, before computing volatility/drawdown/beta/Sharpe, scan the daily-return
+series for any single-day move beyond a high threshold (e.g. |return| > 35%) — the signature
+of an unadjusted split or large special dividend, not normal price action.
+  - If such a jump is detected AND the price basis is "raw_close": do NOT silently compute as
+    if it were a real return. Mark the affected metrics as "unreliable — possible unadjusted
+    split/dividend in window; upgrade to adjusted prices for accurate stats," and surface that
+    note in the API response and the UI panel.
+  - Do NOT auto-delete the day blindly (a real -35% crash is legitimate) — the honest move is
+    to FLAG the metric as potentially unreliable, not to fabricate a clean number.
+  - Make the threshold a named constant with a comment explaining the split rationale.
+
+TASK 2 — ADJUSTED-DATA PATH
+Confirm ALPHA_VANTAGE_FUNCTION=TIME_SERIES_DAILY_ADJUSTED works end-to-end. When adjusted data
+is in use:
+  - price basis reports "adjusted",
+  - the Task-1 jump warning is suppressed (adjusted series won't have split artifacts),
+  - the UI basis note reads "split/dividend adjusted" instead of the raw-close caveat.
+The basis (raw vs adjusted) must drive the labeling and the warning automatically.
+
+TASK 3 — HOUSEKEEPING
+Remove the leftover pasted-instructions file in attached_assets/ (the stray file you flagged).
+Confirm nothing in the app references it.
+
+TASK 4 — TESTS
+- A synthetic return series containing a split-sized jump (e.g. -75%) on the raw basis →
+  metrics are flagged "unreliable", not silently computed.
+- A normal series → no warning, metrics compute as before.
+- Adjusted-basis path → no warning even across a known split date.
+- The no-AI guard test STILL passes; existing 60 engine + 6 smoke tests still pass.
+
+DEFINITION OF DONE
+- Raw-price risk metrics can never be silently wrong: a likely split/dividend in the window
+  flags the metric as unreliable with an honest upgrade note.
+- Adjusted-data path verified; basis label + warning switch automatically on basis.
+- attached_assets/ leftover removed.
+- All tests pass including the no-AI guard.
+- Report: the guard logic (file/line), a before/after on a split-affected symbol (raw → flagged,
+  adjusted → clean), and the test output.

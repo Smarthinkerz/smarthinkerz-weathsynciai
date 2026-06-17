@@ -1,0 +1,111 @@
+ROLE
+Full-system audit of Nexus — the cross-app memory/context/orchestration layer for SmarThinkerz.
+Nexus aggregates a user's most sensitive data across every app (HR/salary, financial, learning,
+business, travel) in a User Intelligence Graph (vector DB + Postgres), serves it via getContext(),
+and coordinates apps via an orchestration engine, multi-agent runtime, and event bus. A leak is
+catastrophic and platform-wide, so this audit is weighted overwhelmingly toward isolation, auth,
+and privacy.
+
+EXECUTE-AND-PROVE (command → raw output → verdict). Where a claim has no test, WRITE and RUN one.
+Deliver (A) executed evidence and (B) a final report with success/failure rate + recommendations.
+
+EXECUTION ORDER (STRICT — DO NOT SKIP)
+Work ONE tier at a time. After EACH tier, STOP, report that tier's evidence to me, and WAIT for my
+explicit go-ahead before starting the next tier. Do not begin Tier 2 until I approve Tier 1; do not
+begin Tier 3 until I approve Tier 2; do not begin Tier 4 until I approve Tier 3. Produce the final
+report (Part B) only after I approve Tier 4. Never run ahead — a pause for my approval is required
+between every tier.
+
+STEP 0 — GROUND IT
+State the real stack (vector DB, primary store, orchestration engine, event bus), how apps
+authenticate to Nexus, and the actual build/test commands. Use these throughout.
+
+HONESTY RULES
+- Run everything; show raw output. Never mark PASS without the command + output proving it.
+- Unverifiable-from-code → REQUIRES-HUMAN with exact steps. Never fake a PASS.
+- Report failures honestly; do not tune or cherry-pick to inflate the score.
+- Any Tier-1 failure is a LAUNCH BLOCKER regardless of the overall score (95% with one isolation
+  failure = FAIL).
+
+PART A — EXECUTE & PROVE (one tier at a time, pausing for approval after each)
+
+== TIER 1 — ISOLATION & AUTH ACROSS ALL FOUR LAYERS (Launch-Gating) ==
+1. CROSS-USER ISOLATION (getContext API)
+   As user A (or an app session acting for A), attempt to read AND mutate user B's memory/context
+   via every path (IDs, query params, tokens, app identity). All attempts must be denied. Show
+   requests + rejection responses.
+2. VECTOR-DB PARTITIONING
+   Seed users A and B with deliberately similar embeddings. Run user A's semantic query and prove
+   zero of user B's vectors are returned. Confirm every vector query carries a per-user/tenant
+   filter (Qdrant payload filter / Weaviate tenant) — not just app-level filtering.
+3. EVENT-BUS SCOPING
+   Prove an app only receives events for users/contexts it is authorized for. No user data should
+   be broadcast to unsubscribed apps.
+4. AGENT AUTHORIZATION
+   Prove an agent registered by app X cannot act on a user who hasn't authorized X. Tokens must be
+   scoped and non-replayable across users/apps.
+5. INTER-APP AUTH
+   Requests with no/invalid service+user credentials are rejected. An app cannot fetch context for
+   a user who hasn't authorized it.
+6. SECRET / DATA EXPOSURE
+   Grep all responses and config files for secrets, internal IDs, or another user's data bleeding
+   into payloads.
+
+>>> STOP. Report Tier 1 evidence and WAIT for my go-ahead before starting Tier 2. <
+
+== TIER 2 — PRIVACY & GOVERNANCE ==
+7. CONTEXT SCOPING (Least Privilege)
+   Assert the exact field set returned by getContext() per app. The travel app must not receive
+   HR/salary or financial fields. CoreHR data must not reach unrelated apps. (Field-level
+   over-sharing, distinct from Tier 1 binary access denial.)
+8. ENCRYPTION
+   Sensitive data is encrypted at rest. TLS is enforced in transit. Show evidence.
+9. CONSENT
+   Cross-app data sharing requires and records explicit user consent. Nothing is shared before
+   consent exists.
+10. GDPR / DATA RIGHTS
+    Full export (all of a user's memory across both stores) and hard deletion (real erasure across
+    Postgres and the vector store, not a soft flag). Write and run tests for both.
+
+>>> STOP. Report Tier 2 evidence and WAIT for my go-ahead before starting Tier 3. <
+
+== TIER 3 — INTEGRITY, ORCHESTRATION SAFETY, RESILIENCE ==
+11. MEMORY INTEGRITY
+    Writes are user-scoped and versioned. One app cannot corrupt or overwrite another app's
+    namespace. Conflicting writes resolve deterministically.
+12. ORCHESTRATION SAFETY + BLAST RADIUS
+    Cross-app actions are authorized and bounded. The human-approval gate for privileged actions
+    cannot be bypassed. A failed or malformed workflow (Temporal/BullMQ) cannot cascade unintended
+    proactive actions across apps.
+13. RESILIENCE / SPOF
+    Simulate Nexus being unavailable. Apps must degrade gracefully and fail safe (no crash, no data
+    exposure, no fail-open auth).
+
+>>> STOP. Report Tier 3 evidence and WAIT for my go-ahead before starting Tier 4. <
+
+== TIER 4 — HYGIENE & DEPLOYMENT ==
+14. Build & type-check (show errors verbatim).
+15. Test suite (actual pass/fail counts; add tests for any untested critical paths).
+16. Endpoint health (status + response shapes).
+17. Dependency CVE audit.
+18. Environment validation (fails loudly on missing required variables).
+19. Self-host deployment — scan Helm charts and Docker configs for hardcoded secrets; confirm
+    inter-service network policies are defined.
+
+>>> STOP. Report Tier 4 evidence and WAIT for my go-ahead before producing the final report. <
+
+PART B — FINAL REPORT (only after I approve Tier 4)
+- Table: every check · verdict (PASS / PARTIAL / FAIL / REQUIRES-HUMAN) · evidence reference.
+- Success rate = (# PASS) / (total checks) as %.
+- Explicitly list every FAIL and PARTIAL with severity + a specific, actionable fix.
+- Call out EVERY Tier-1 failure explicitly as a LAUNCH BLOCKER, separate from the overall %.
+- REQUIRES-HUMAN list with exact steps the human must perform.
+- Prioritized recommendations (most impactful first).
+- Staged-rollout recommendation: Do NOT connect high-sensitivity apps (CoreHR, financial) to Nexus
+  on day one. Launch first with lower-sensitivity apps (Academy + Studio) to prove isolation and
+  scoping work in real production before ingesting crown-jewel data (HR, financial, salary).
+
+CONSTRAINTS
+- Do not weaken security or isolation while auditing.
+- Leave the repo clean. List all changed files.
+- Report numbers must match Part A evidence exactly — no rounding up.

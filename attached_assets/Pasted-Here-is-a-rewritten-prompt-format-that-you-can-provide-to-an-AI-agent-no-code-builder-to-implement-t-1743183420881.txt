@@ -1,0 +1,87 @@
+Here is a rewritten prompt format that you can provide to an AI agent no-code builder to implement the above features for the **Interactive Global Business Map** in the **WealthSync AI Premium Company Plan**:
+
+---
+
+**Prompt for Interactive Global Business Map Features:**
+
+**Objective:**  
+Create an **Interactive Global Business Map** for the **WealthSync AI Premium Company Plan**. The map should provide comprehensive global business insights, real-time data, and advanced AI-powered features tailored for business decision-making. It should be an intuitive, dynamic interface with robust filtering and analysis capabilities.
+
+### Key Features and Functionality:
+
+1. **Global Overview:**
+   - Display a dynamic, interactive world map.
+   - Provide zoom-in/zoom-out functionality to explore specific regions or countries.
+   - Highlight regions based on business performance or growth using color-coding or heatmaps.
+   - Implement an interactive interface where clicking on regions provides detailed insights for that area.
+
+2. **Business Insights by Region:**
+   - Once a region or country is selected, display detailed business statistics, such as GDP, growth rates, key industries, trade relationships, and economic indicators.
+   - Provide AI-driven predictions on regional economic trends.
+   - Show live data from trade deals, stock exchanges, or market sentiment specific to the selected region.
+
+3. **Global Business Network Map:**
+   - Highlight key trade partners, suppliers, and business connections for selected regions.
+   - Display business relationships and identify investment opportunities in emerging markets or regions.
+
+4. **Company & Market Data:**
+   - Provide a list of top companies, startups, and industries in each selected region.
+   - Show real-time company performance data like market share, revenue growth, or industry rankings.
+   - Integrate sentiment analysis from financial data, news, and social media for market health.
+
+5. **Trade Routes and Supply Chains:**
+   - Visualize global supply chain networks, key trade routes, and logistics hubs.
+   - Display trade flow between countries and regions with key import/export data and volumes.
+
+6. **Geopolitical Risk Analysis:**
+   - Add a risk heatmap based on geopolitical stability, legal frameworks, and business risks.
+   - Use AI to predict potential geopolitical events that may affect business operations in specific regions.
+
+7. **Customizable Filters:**
+   - Provide filters by industry, business size (large enterprises, SMBs, startups), and investment type (venture capital, stocks, real estate).
+   - Allow filtering by economic, trade, and industry-specific data for focused insights.
+   - Enable users to track specific regions or countries based on business needs.
+
+8. **Market Performance Analytics:**
+   - Allow users to compare business performance, market conditions, and growth potential between countries.
+   - Provide interactive graphs, charts, and trend visualizations for each region or country.
+   - Include AI-powered market predictions, focusing on high-growth sectors or investment opportunities.
+
+9. **Interactive Data Layers:**
+   - Implement multiple data layers (e.g., economic, trade, industry performance, demographics) that users can toggle between.
+   - Include key demographic layers, such as population, workforce stats, and urban vs rural growth.
+
+10. **AI-Powered Business Growth Suggestions:**
+    - Use AI to suggest emerging markets or regions with the best growth potential.
+    - Offer AI-driven insights into sectors predicted to outperform in certain regions or countries.
+
+11. **Visualization Tools:**
+    - Integrate graphs and charts showing growth trends, industry performance, and market data.
+    - Provide key health metrics for businesses in specific regions, such as profitability and market stability.
+
+12. **Global Event Integration:**
+    - Display upcoming business events (conferences, expos, investor meetups) related to specific industries or regions.
+    - Implement AI to predict global events or market shifts based on current data trends.
+
+13. **User-Centric Features:**
+    - Allow users to create custom regions and track specific business interests.
+    - Enable report downloads (PDF, CSV, Excel) for business insights, market trends, and country-specific data.
+    - Include interactive tutorials or guides to help users navigate the map and interpret the data.
+
+---
+
+### Technical Requirements:
+- **Responsive Design:** Ensure the map is mobile and desktop-friendly.
+- **Real-Time Updates:** Integrate live data feeds for stock exchanges, trade agreements, and market trends.
+- **AI Integration:** Use machine learning and AI to provide predictive analytics, risk assessments, and personalized insights.
+- **API Integrations:** Integrate data from external APIs to populate country-specific data, such as economic indicators, company performance, and global trade.
+
+### User Interactivity:
+- **Click to Expand:** Clicking on any region or country should expand it to display detailed insights and statistics.
+- **Interactive Filters:** Users should be able to filter data based on industry, business size, and investment opportunities.
+- **Drill-Down Capability:** Allow users to click through to deeper levels of information, such as specific companies, industries, and market trends.
+
+---
+
+**Expected Outcome:**  
+An AI-powered, interactive global business map that delivers real-time insights, predictive analytics, and comprehensive business data across regions and industries, helping users make informed, data-driven decisions.

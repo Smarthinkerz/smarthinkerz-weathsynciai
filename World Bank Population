@@ -1,0 +1,2 @@
+Base URL: https://api.worldbank.org/v2
+Endpoint: /country/all/indicator/SP.POP.TOTL?format=json

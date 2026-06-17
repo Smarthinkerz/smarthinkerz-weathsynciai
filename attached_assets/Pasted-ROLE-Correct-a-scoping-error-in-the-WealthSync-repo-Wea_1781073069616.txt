@@ -1,0 +1,37 @@
+ROLE
+Correct a scoping error in the WealthSync repo. WealthSync is a geo-economic / business-intelligence
+/ negotiation platform — NOT a stock app. Stock-equity functionality (price feed + portfolio risk
+metrics) was built into it by mistake and belongs to a separate Stock & Crypto AI app. Surgically
+REMOVE the misplaced stock-equity layer while PRESERVING all legitimate WealthSync work. Two phases:
+INVENTORY + report first, then remove only after my go-ahead.
+
+PHASE 1 — INVENTORY (report; do NOT delete yet)
+Find and list, with file:line, everything stock-equity-specific:
+- The equity price feed integration (e.g. Alpha Vantage) and its API key/env var.
+- Equity-price-based portfolio risk metrics (volatility, Sharpe, beta, drawdown) — e.g. risk.ts,
+  equity-dependent parts of portfolio.ts, the split-guard.
+- The RISK_ANALYTICS_LIVE flag, the risk-analytics UI panel / "coming soon" state / premium gate
+  for risk (computed-portfolio.tsx, portfolio-metrics.ts).
+- Any pricing/feature-list references to stock/portfolio risk analytics.
+- Any stock-specific tests.
+For each, mark PURE stock (safe to remove) or MIXED with non-stock logic (needs careful separation).
+>>> STOP and report the inventory. Wait for my go-ahead before removing. <<<
+
+DO NOT TOUCH (legitimate WealthSync work — preserve):
+- Cross-tenant isolation / RBAC fixes and the secret-leak fix.
+- Financial-advice and other disclaimers (WealthSync still gives investment recommendations).
+- Beta labels on the AI features (threat simulation, co-policy modeling, multi-agent, scenario sims).
+- Env validation, Sentry, World Bank / macro data, and all BI / geo-economic / negotiation features.
+
+PHASE 2 — REMOVE (only after I approve the inventory)
+Cleanly remove the stock-equity layer from Phase 1. Remove the equity feed's env var/secret from
+WealthSync config (the key was rotated and isn't used here). Separate any MIXED code so non-stock
+logic survives.
+
+VERIFY
+- App builds, type-checks, boots clean. Test suite passes (minus removed stock tests — report the
+  new count). Tenant isolation, disclaimers, env validation, Sentry all still intact.
+- List every file changed or removed.
+
+HONESTY: show commands + output. Remove nothing outside the stock-equity layer. If unsure whether
+something is stock-specific, flag it — don't delete on a guess.

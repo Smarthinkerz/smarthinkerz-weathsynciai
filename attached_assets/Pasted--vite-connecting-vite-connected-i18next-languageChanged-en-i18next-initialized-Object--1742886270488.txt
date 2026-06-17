@@ -1,0 +1,41 @@
+[vite] connecting...
+[vite] connected.
+i18next: languageChanged en
+i18next: initialized 
+Object {debug: true, initAsync: true, ns: Array(1), defaultNS: Array(1), fallbackLng: Array(1), …}
+i18n initialized with language: en
+Router component rendered
+Making query request to /api/user
+Making query request to /api/company
+Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
+Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
+The above error occurred in the <Redirect> component:
+
+    at Redirect (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=ffcad241:399:11)
+    at Route (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=ffcad241:323:16)
+    at ProtectedRoute (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/lib/protected-route.tsx:22:3)
+    at Switch (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=ffcad241:379:17)
+    at Router
+    at AuthProvider (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/hooks/use-auth.tsx:26:32)
+    at QueryClientProvider (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=ffcad241:2848:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+at Redirect (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=ffcad241:399:11)
+at Route (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=ffcad241:323:16)
+at ProtectedRoute (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/lib/protected-route.tsx:22:3)
+at Switch (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=ffcad241:379:17)
+at Router
+at AuthProvider (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/src/hooks/use-auth.tsx:26:32)
+at QueryClientProvider (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=ffcad241:2848:3)
+at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+at t.value (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://1f5df454-b5e7-4ef9-b739-8152ca993c26-00-31m8gcb6pha1f.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
+Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.

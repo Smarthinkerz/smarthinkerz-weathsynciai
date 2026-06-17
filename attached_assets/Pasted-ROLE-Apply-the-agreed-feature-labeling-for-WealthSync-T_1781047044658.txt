@@ -1,0 +1,47 @@
+ROLE
+Apply the agreed feature-labeling for WealthSync. Two parts: (1) beta-label the speculative
+AI features; (2) put risk analytics in a "Coming soon" state behind a feature flag until the
+data feed is licensed and live, and stop presenting it as a currently-delivered paid benefit.
+
+HARD CONSTRAINTS
+- Do not break the computation engine, the no-AI guard, the disclaimers, or the premium gate
+  you already built — reuse the gate; just add the coming-soon state in front of it.
+- Labels must be truthful: "Beta" = works but experimental; "Coming soon" = not available yet.
+  Do not label anything beta beyond the list below.
+
+TASK 1 — BETA LABELS (exact list)
+Add a "Beta" badge to ONLY these features, on both the feature's page/header and wherever it
+appears in nav and the pricing/feature list:
+  - Threat Simulation
+  - Co-Policy Modeling
+  - Multi-Agent
+Do not label any other feature beta. If there's a closely-related speculative feature you think
+also qualifies (e.g. scenario simulations), ASK me first — don't assume.
+
+TASK 2 — RISK ANALYTICS → "COMING SOON" (feature-flagged)
+- Add a feature flag, e.g. RISK_ANALYTICS_LIVE, default FALSE.
+- While FALSE (now): the risk-analytics panel shows a clean "Coming soon" state to ALL tiers —
+  NOT "premium required", NOT "insufficient data" — because upgrading wouldn't unlock working
+  data yet. The coming-soon state supersedes the premium gate while the flag is off.
+- In the pricing/feature list: present the computed risk analytics (volatility, Sharpe, beta,
+  max drawdown) as "Coming soon", NOT as a currently-delivered Professional/Elite benefit, so we
+  aren't charging for it as a live deliverable yet.
+- When the flag is later set TRUE (data feed licensed + live): the EXISTING behavior takes over
+  unchanged — non-premium see "premium → upgrade"; premium see computed metrics with the
+  Methodology & Limitations note, or honest "insufficient data" per symbol.
+- Keep the methodology/limitations note wired for the live state.
+
+TASK 3 — VERIFY
+- Flag OFF: risk-analytics shows "Coming soon" to every tier; it's listed as "Coming soon" (not a
+  delivered benefit) in pricing. Flag ON: premium gate + computed behavior intact.
+- Beta badges on exactly the three named features, nothing else.
+- Engine tests + no-AI guard still pass; disclaimers and honest labels intact.
+
+DEFINITION OF DONE
+- "Beta" badge on Threat Simulation, Co-Policy Modeling, Multi-Agent only.
+- Risk analytics shows "Coming soon" to all tiers while RISK_ANALYTICS_LIVE is false, and is listed
+  as "Coming soon" (not a current paid deliverable) in pricing; flipping the flag restores the
+  premium-gated computed feature with the methodology note.
+- Integrity/tests intact.
+- Report: the flag (file:line), the coming-soon UI state, the pricing-list change, and the exact
+  features that received a Beta badge.

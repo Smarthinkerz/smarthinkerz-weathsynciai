@@ -1,0 +1,58 @@
+ROLE
+Senior engineer. Convert WealthSync's decision-driving numbers from LLM-generated
+estimates into genuinely COMPUTED values — deterministic code running real formulas on
+real data feeds (Finnhub live prices, World Bank macro). Same LLM-free-engine pattern
+proven in the stock app. GOAL: numbers that are VERIFIABLE, REPRODUCIBLE, and AUDITABLE.
+NOT "accurate predictions" — do not claim or imply predictive accuracy anywhere.
+
+HARD CONSTRAINTS
+- Computation happens in plain code ONLY. No LLM produces any number. The engine module
+  must contain ZERO LLM/OpenAI calls — enforce with a test (the stock app's "One Rule").
+- Every computed value derives from REAL data (Finnhub, World Bank). No hardcoded,
+  fabricated, or LLM-supplied numbers. If required data is missing → explicit
+  "insufficient data" state, never a guess.
+- Do NOT tune, curve-fit, or fabricate to make numbers look good. Report what the data gives.
+- The LLM may ORCHESTRATE (decide what to compute) and NARRATE (explain the result) via
+  function calling, but must NEVER generate the number — it calls the engine function and
+  relays the computed value.
+- No accuracy overclaims in UI copy. Label computed numbers "Computed · source: [X]",
+  never "accurate" or "guaranteed".
+
+STEP 1 — INVENTORY & CLASSIFY
+List every numeric output in the app and classify each:
+  (A) COMPUTABLE — real formula + available data
+      e.g. portfolio weight %, market value, P&L $/%, volatility, annualized return,
+      max drawdown, beta vs benchmark, Sharpe, FX rates, GDP/inflation/macro figures
+  (B) JUDGMENTAL — no formula, no ground truth
+      e.g. geopolitical risk, scenario probability, "severity", strategic-fit scores
+Output a table: [number → screen → A or B → data source if A].
+
+STEP 2 — BUILD THE COMPUTATION ENGINE (LLM-free module, e.g. lib/compute or engine/)
+For every (A) number, write a deterministic function computing it from Finnhub/World Bank:
+  - portfolio: weights, market value, P&L, allocation
+  - risk/return: volatility (std of returns), annualized return, max drawdown, beta, Sharpe
+  - macro: FX, GDP, inflation etc. fetched from World Bank, displayed as-fetched (cite the series)
+  Each function: pure, deterministic, unit-tested against a hand-verified example.
+
+STEP 3 — WIRE INTO UI + PROVENANCE
+  - (A) numbers render FROM the engine with a "Computed · source: [Finnhub/World Bank]" tag,
+    and the "AI estimate" tag is REMOVED from them — they're genuinely computed now.
+  - (B) numbers KEEP the "AI estimate" tag. Do NOT fake computation for them.
+  - Anywhere the LLM presents an (A) number, it must call the engine function (function
+    calling), not write the number.
+  - Tabular numbers, consistent precision per metric.
+
+STEP 4 — TESTS & GUARD
+  - Determinism: same inputs → identical output.
+  - Correctness: each metric matches a hand-verified example.
+  - No-LLM guard: a test asserting the engine module imports no LLM client (fails CI if violated).
+  - Insufficient-data: missing feed → explicit empty state, never a guessed number.
+
+DEFINITION OF DONE
+- Every (A) number is computed in code from real data, reproducible, unit-tested, and
+  labeled "Computed · [source]"; the "AI estimate" tag removed from these.
+- Every (B) number stays honestly labeled "AI estimate"; none faked.
+- Engine module contains zero LLM calls (enforced by test).
+- No UI copy claims predictive accuracy.
+- Report: inventory table, engine functions (file/line), tests, and a per-number
+  before→after (was "AI estimate" → now "Computed", or stays "AI estimate" with reason).

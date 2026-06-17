@@ -1,0 +1,45 @@
+ROLE
+Small follow-up on the WealthSync feature-labeling pass. Three items: extend the beta labels
+for consistency, align one pricing line, and add a test that actually verifies the
+RISK_ANALYTICS_LIVE flag-ON path (rather than trusting it sight-unseen).
+
+HARD CONSTRAINTS
+- Do not label anything beta beyond the set specified here (the original three + Scenario
+  simulations). Don't touch other features.
+- Keep RISK_ANALYTICS_LIVE committed as FALSE. The flag-ON work is a TEST only — do not ship it true.
+- Don't break the engine, no-AI guard, disclaimers, or the single-source-of-truth flag.
+
+TASK 1 — BETA BADGE: SCENARIO SIMULATIONS
+Add the Beta badge to "Scenario simulations" using the same treatment as the other three
+(page header, desktop nav, mobile nav, and any pricing/feature list where it appears). This is
+the only additional feature to label — nothing else.
+
+TASK 2 — PRICING COPY CONSISTENCY
+In the Professional tier, the "Full multi-agent system access" line should read with "(Beta)"
+to match the Multi-Agent beta label, so the badge and the pricing copy agree. Apply on both
+pricing surfaces.
+
+TASK 3 — VERIFY THE FLAG-ON PATH WITH A TEST (don't assume it)
+Add an automated test that exercises BOTH flag states so the live behavior is proven, not
+inferred from "it's the same code path":
+  - RISK_ANALYTICS_LIVE = false  → server returns risk.status "coming_soon" for every tier.
+  - RISK_ANALYTICS_LIVE = true + non-paid tier → "premium_required".
+  - RISK_ANALYTICS_LIVE = true + paid tier + data present → computed metrics returned.
+  - RISK_ANALYTICS_LIVE = true + paid tier + no data for symbol → honest "insufficient_data".
+Drive the flag via injection/mock in the test (don't depend on the committed constant). Confirm
+the client RiskComingSoon vs computed/premium states map to those statuses.
+Leave the committed flag FALSE.
+
+TASK 4 — VERIFY
+- Beta badge now on exactly four features: Threat Simulation, Co-Policy Modeling, Multi-Agent,
+  Scenario simulations — nothing else.
+- "Full multi-agent system access (Beta)" on both pricing surfaces.
+- New flag-state test passes alongside the existing suite; no-AI guard + engine 77/77 + smoke intact.
+- RISK_ANALYTICS_LIVE still committed as false.
+
+DEFINITION OF DONE
+- Four beta-badged features (the three + Scenario simulations); pricing line aligned.
+- A passing test covering all four flag-state/tier combinations above; flag committed false.
+- Integrity/tests intact.
+- Report: files/lines for the new badge + pricing line, the new test (file:line + what it asserts),
+  and confirmation the committed flag is false.

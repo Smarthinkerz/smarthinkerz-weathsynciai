@@ -1,0 +1,95 @@
+Windsor.ai provides ETL/ELT data pipelines that are cloud-based and require zero maintenance. These pipelines load all your data from sources such as Salesforce, HubSpot, Facebook Ads into Google BigQuery and update it regularly. By having all your data stored in a high-performance cloud warehouse, you can perform various tasks ranging from basic reporting to intricate ad-hoc queries. Additionally, it allows you to conveniently merge data between different sources. Windsor.ai connectors can be set up in just five minutes and can adapt to any changes in the source automatically. This means that your data engineering team can focus on creating value instead of spending time on adjustments.
+
+Windsor.ai typically generates a fully configured and predetermined schema for most data sources. This ensures that you still have access to all the necessary data.
+
+How can you quickly load your data and begin your free trial with Windsor.ai?
+
+Step 1: Connect your data source  
+Step 2: Click on the "Sign Up with Windsor.ai" button located above and follow the prompts.
+Step 3: Create a new transfer and complete the transfer form.
+Step 4: Wait for the initial historical transfer to complete syncing, which may take several minutes or even days depending on the size of your data source.
+Step 5: Start utilizing your data.
+About Windsor.ai
+
+At Windsor.ai we help marketers and data engineers to get their job done efficiently. We provide them with connectors to all their data and allow them to stream the data to their platform of choice. The setup is done in minutes.
+
+Learn more 
+About managed services
+Managed Services are fully hosted, managed, and supported by the service providers. Although you register with the service provider to use the service, Google handles all billing.
+
+Additional details
+Type: SaaS & APIs
+Last product update: 5/27/23
+Category: Big data, Analytics, DevOps, Advertising
+Pricing
+Free
+Basic
+Standard
+Plus
+Professional
+Free
+Subscription Period*
+1 month - Free
+USD 23.00/mo
+Subscription Period*
+1 month - USD 23.00/mo
+USD 118.00/mo
+Subscription Period*
+1 month - USD 118.00/mo
+USD 298.00/mo
+Subscription Period*
+1 month - USD 298.00/mo
+USD 598.00/mo
+Subscription Period*
+1 month - USD 598.00/mo
+Data source connectors 1 
+1
+3
+7
+12
+14
+Data destinations 
+1
+2
+2
+2
+5
+API + database access
+Yes
+Yes
+Yes
+Yes
+Yes
+Dedicated account manager
+No
+No
+No
+No
+Yes
+Enterprise SLA
+No
+No
+No
+No
+No
+Enterprise onboarding
+No
+No
+No
+No
+No
+Cancellation and change policy
+Your subscription fee is billed every month.
+Your subscription will be automatically renewed at the end of the subscription cycle.
+You can cancel your subscription by disabling auto-renewal.
+You can upgrade or downgrade Windsor.ai Data Pipelines service.
+Get a custom quote
+Can’t find a pricing plan for your project? Contact Windsor.ai's sales to get a custom quote.
+
+Support
+Documentation
+
+Learn more 
+Terms of Service
+By purchasing, deploying, accessing, or using this product, you agree to comply with the Google Cloud Marketplace Terms of Service , Windsor.ai Terms of Service  and the terms of applicable open source software licenses bundled with the product.
+

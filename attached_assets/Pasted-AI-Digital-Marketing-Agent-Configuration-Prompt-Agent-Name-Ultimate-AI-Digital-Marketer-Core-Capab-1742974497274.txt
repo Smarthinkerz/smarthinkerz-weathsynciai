@@ -1,0 +1,170 @@
+AI Digital Marketing Agent Configuration Prompt
+Agent Name: Ultimate AI Digital Marketer
+
+Core Capabilities & Features:
+Multi-Channel Marketing Automation:
+
+Plan, create, and execute marketing campaigns across multiple platforms (social media, email, PPC, SEO, content marketing).
+
+Automated A/B testing for ad creatives and landing pages.
+
+AI-Powered SEO Optimization:
+
+Keyword research & trend analysis.
+
+Automated content suggestions based on top-performing pages.
+
+Real-time SEO audits & backlink analysis.
+
+AI-Powered Social Media Management:
+
+Auto-generate, schedule, and optimize posts.
+
+Sentiment analysis & brand reputation monitoring.
+
+AI-generated captions, hashtags, and post suggestions.
+
+AI Chatbot for Lead Generation & Customer Engagement:
+
+Multi-lingual, 24/7 chatbot for lead qualification.
+
+Conversational AI with sentiment analysis.
+
+Live chat escalation with human agents.
+
+Automated Email Marketing & Personalization:
+
+AI-driven subject line & content generation.
+
+Smart segmentation & predictive customer behavior analysis.
+
+Dynamic email optimization based on user engagement.
+
+AI-Generated Content Marketing & Copywriting:
+
+Blog/article creation optimized for SEO & engagement.
+
+AI-powered product descriptions, ad copies, and landing pages.
+
+NLP-driven storytelling & brand voice adaptation.
+
+AI Video & Image Generation for Ads & Content:
+
+AI-powered video scriptwriting & automatic video generation.
+
+AI-driven image enhancement & banner ad creation.
+
+Auto-generate thumbnails and social media graphics.
+
+E-Commerce & Conversion Rate Optimization (CRO):
+
+Personalized product recommendations.
+
+AI-driven customer behavior prediction.
+
+AI-enhanced landing page design suggestions.
+
+Ad Campaign Optimization & Management:
+
+Automated ad spend optimization (Google, Meta, TikTok Ads).
+
+Predictive ROI analytics & bid adjustments.
+
+AI-powered audience segmentation & lookalike audience creation.
+
+AI-Powered Analytics & Reporting Dashboard:
+
+Real-time marketing analytics & KPIs.
+
+Predictive insights & growth forecasting.
+
+Automated performance summaries & strategy recommendations.
+
+Required APIs & Integrations:
+1. Social Media & Ads APIs
+Meta API (Facebook & Instagram Ads, Messenger, Instagram Insights)
+
+Twitter/X API
+
+LinkedIn Marketing API
+
+TikTok Business API
+
+YouTube Data API
+
+Google Ads API
+
+Pinterest API
+
+Snapchat Marketing API
+
+2. SEO & Content APIs
+Google Search Console API
+
+SEMrush API
+
+Ahrefs API
+
+Moz API
+
+OpenAI GPT-4 API (for content generation)
+
+3. Email Marketing APIs
+Mailchimp API
+
+SendGrid API
+
+ActiveCampaign API
+
+HubSpot API
+
+4. Chatbot & AI NLP APIs
+OpenAI GPT-4 API (for chatbot & copywriting)
+
+Google Dialogflow API
+
+IBM Watson API
+
+Microsoft Azure Bot Service
+
+5. E-Commerce & CRM APIs
+Shopify API
+
+WooCommerce API
+
+Salesforce API
+
+Zoho CRM API
+
+6. Analytics & Reporting APIs
+Google Analytics API
+
+Hotjar API (for user behavior tracking)
+
+Power BI API
+
+7. Image & Video Generation APIs
+DALL·E API (for AI-generated images)
+
+RunwayML API (for AI video creation)
+
+DeepAI API
+
+Additional Features for 100% Functionality:
+✅ Drag-and-Drop Workflow Automation (Zapier Integration)
+✅ Real-Time Lead Scoring & Predictive Analytics
+✅ AI-Powered Smart Recommendations for marketing strategies
+✅ Integration with Payment Gateways (Stripe, PayPal, etc.)
+✅ Voice Search Optimization & AI-Powered Voice Assistants
+
+Deployment Instructions:
+Ensure all APIs are correctly connected and authorized.
+
+Enable cloud-based scalability (AWS, Azure, or Google Cloud).
+
+Activate real-time monitoring and automatic updates.
+
+Set up user-friendly dashboards and customization options.
+
+Test all workflows for seamless automation across channels.
+

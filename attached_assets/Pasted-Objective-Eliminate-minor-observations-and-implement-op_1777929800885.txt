@@ -1,0 +1,60 @@
+Objective: Eliminate minor observations and implement optional enhancements to move from 98.4% → 100% audit score.
+
+🔒 Security & Observability
+Add per‑endpoint rate limits (e.g., 30/hour for AI‑intensive routes like /api/multi-agent/collaborate).
+
+Instrument observability hooks: log request duration + token usage for multi‑agent and policy‑modeling endpoints.
+
+🧪 Testing
+Add Playwright smoke tests for 5 critical flows:
+
+Auth/login
+
+Payment/checkout
+
+Lead generation
+
+AI agent collaboration
+
+Certificate issuance
+
+⚡ Infrastructure
+Implement /api/health endpoint that pings DB + OpenAI + integrations for uptime monitors.
+
+Add audit logging for sensitive actions (plugin config changes, API key creation, subscription changes).
+
+📚 Features & UX
+Replace certificate generation with a real PDF library (e.g., pdfkit) for downloadable certificates.
+
+Normalize legacy tier names in code paths (remove “basic/premium” remnants).
+
+Auto‑increment plugin.installCount on install (instead of relying on storage layer).
+
+💰 Monetization & Integrations
+Add Stripe fallback to Tap Payments for non‑MENA markets.
+
+Build admin dashboard for managing plugins, learning tracks, and integration secrets.
+
+🌍 Scalability & Globalization
+Add WebSocket‑driven notifications (replace 30‑second polling).
+
+Implement multi‑region failover for deployment.
+
+Add Redis layer for session storage and rate‑limit counters.
+
+Expand internationalization beyond English (i18next already wired).
+
+📌 Final Prompt (Copy‑Paste)
+Code
+Goal: Achieve 100/100 audit score for WealthSync AI.
+
+Tasks:
+- Add per-endpoint rate limits and observability hooks.
+- Implement Playwright smoke tests for auth, payment, lead gen, AI agent, certificate.
+- Create /api/health endpoint and audit logging for sensitive actions.
+- Replace certificate generation with PDF library.
+- Normalize tier names and auto-increment plugin installCount.
+- Add Stripe fallback to Tap Payments.
+- Build admin dashboard for plugins, learning tracks, secrets.
+- Enable WebSocket notifications, multi-region failover, Redis session storage.
+- Expand internationalization with i18next.

@@ -1,0 +1,103 @@
+# WealthSync AI — Corporate & Smoothness Master Specification
+### AI business-intelligence platform — refine, add smoothness, and close the finance-AI integrity gaps
+
+WealthSync is on the mature end (light professional sage-green theme, shadcn, i18n+RTL, SEO, security-hardened). So this is refinement, not redesign — **but** as a finance-advice-adjacent product with AI-generated numbers, its most important work isn't visual: it's **disclaimers, number provenance, and making the breadth real.**
+
+> **Decisions:** keep the light/sage professional theme; add the missing smoothness layer; consume the shared SmarThinkerz brand tokens; treat financial-advice disclaimers + LLM-number provenance as first-class (the stock/BrainPower lesson applies here); be honest about breadth-vs-depth.
+>
+> Stack: React + shadcn/ui, OKLCH light tokens, system fonts, GPT-4o, Finnhub/World Bank, Tap billing, session auth, i18n EN/ES/JA/AR/ZH.
+
+---
+
+## A — Integrity & compliance layer (the centerpiece for THIS app)
+
+This is where WealthSync's real risk lives. Treat it like you treated the stock/BrainPower engines.
+
+### A.1 Financial-advice disclaimers (regulatory)
+Every screen that gives financial/portfolio/investment guidance — **Investment Strategist, Personal Finance AI, Economic Dashboard, Deep Research, Threat Simulation risk scores** — needs a persistent "not financial advice / informational only" disclaimer, visible before results. `[component]`
+
+### A.2 Number provenance — are the scores computed or hallucinated?
+The hard question: when WealthSync shows a **risk score, confidence score, portfolio analysis, or fraud score**, is it *computed* or is it *GPT-4o text*? If it's LLM output presented as a number, that's the exact problem you fixed on the stock/BrainPower engines.
+- **Audit every numeric output** an AI agent produces. For each, decide: computed (from a real method/data) or model estimate.
+- **Label provenance** — don't present an LLM-generated number as if it were calculated. If "Deep Research confidence scoring" is the model's own self-assessment, say so; don't imply external validation.
+- Where a number *should* be computed (risk, portfolio metrics), compute it from real data (you have Finnhub/World Bank) rather than asking GPT-4o to guess it. `[structural]`
+
+### A.3 Smart Contracts & verification integrity
+- **Smart Contracts** (AI-generated contract templates): add a clear "not legal advice; review with a qualified professional" disclaimer. AI-drafted legal docs are a liability surface. `[component]`
+- **Verified Badge / Company/Experience Verification:** the badge must rest on a *real* verification step, not an LLM assertion. If verification is AI-assisted, label it as such — a "Verified" badge that isn't truly verified is a trust and liability problem. `[structural]`
+
+---
+
+## B — Token foundation (light/sage kept, systematized)
+1. **Inherit the shared `brand-tokens.css`** and reconcile: sage-green here vs CoreHR royal-blue, CRM sky-blue, stock teal, BrainPower indigo, hub neon. Document sage as WealthSync's accent within the shared layer so the hub reads as one family. `[token/CSS]`
+2. **Tokenize the inline accent colors** (blue-600 CTA, yellow-500 Elite, green-600 paid, red-500 risk, purple-600 admin) into semantic tokens — color = meaning, applied consistently, not ad-hoc per component. `[token/CSS]`
+3. **Tabular numbers everywhere** — this is a finance/BI product: prices, FX, GDP, portfolio values, risk scores, invoice amounts, stats counters. Critical and almost certainly missing with system fonts. `[token/CSS]`
+4. **One hover/focus contract** across nav, cards, buttons. `[token/CSS]`
+
+---
+
+## C — Smoothness layer (missing; additive)
+- **Motion tokens:** easing `cubic-bezier(0.22,1,0.36,1)`/`(0.16,1,0.3,1)`; springs snappy `{280,26}`/smooth `{180,30}`; interactive ≤240ms; transform/opacity only.
+- **Optimistic UI** on high-frequency actions — bookmarking, pursuing opportunities, contract status, billing actions, community upvotes — instant reflect, reconcile, roll back.
+- **Streaming AI responses** — Deep Research / agents run long; stream tokens with progress, never a frozen spinner (SSE).
+- **Layout-matched skeletons** (zero CLS); content cross-fade; staggered list reveals ≤40ms/item.
+- **Route transitions** between the many sections; shared-element where natural; nothing hard-cuts.
+- **Cmd+K palette is already a strength** — make it fast, fuzzy, and cover navigation + actions.
+- **Reduced-motion** fallback (the stats counters and hero video must respect it; no autoplay under reduced-motion).
+- Target **60fps under 4× CPU throttle**; the 8 lazy-loaded heavy pages are good — extend code-splitting.
+
+---
+
+## D — Breadth vs. depth (the honest founder note)
+Two dozen+ features across individual + company journeys is a lot for a solo founder. The enterprise-credibility risk is **demo-ware**: features that look present but are thin or empty.
+- **Seed real data** so every section renders meaningfully on first login — an empty "Community," "Marketplace," or "Learning Center" reads as vaporware. `[component]`
+- **Be honest about maturity** — label genuinely-beta features as beta rather than implying full capability.
+- **Consider focus.** Not a build task, but strategically: a tighter set of features that each work deeply beats a sprawling set that each work shallowly — especially in front of enterprise buyers and investors. The breadth can read as unfocused.
+
+---
+
+## E — Corporate & governance (surface what exists)
+- **Admin Console** (user management, tier override, audit log) exists — ensure RBAC is enforced server-side on every privileged action, not just hidden menus; approvals/overrides logged with reason. `[structural]` (verify)
+- **Dual account model** (separate user/company auth) — ensure org/tenant isolation is enforced at the data layer. `[structural]` (verify)
+- **Dense, sortable, exportable tables** for invoices, leads, opportunities, market reports, directory, audit log — tabular numbers, bulk actions, CSV/PDF export. `[component]`
+- **SOC 2 badge** is a strong enterprise signal — make sure it's accurate (don't display a compliance badge you don't hold; that's a serious misrepresentation). Same for any compliance claims. `[component]` (verify honesty)
+
+---
+
+## F — Consistency & i18n (largely good — polish)
+- i18n EN/ES/JA/AR/ZH with **RTL for Arabic** is genuinely strong and ahead of your other apps — verify RTL uses logical CSS properties throughout and that numerals/dates/currency are locale-aware. `[structural]` (verify)
+- Sidebar active-state contrast; consistent empty states; one StatusBadge/DataTable system across the many list views. `[component]`
+- Landing video: mobile poster fallback + reduced-data respect. `[structural]`
+
+---
+
+## G — Launch readiness (you're in launch mode)
+**Blockers before paying users:**
+- **Financial-advice disclaimers** on every guidance/score screen (A.1) — legal exposure, #1 blocker.
+- **Number-provenance pass** (A.2) — don't ship LLM-guessed risk/confidence numbers presented as computed analysis; at minimum label provenance honestly.
+- **Smart Contracts "not legal advice"** + **Verified Badge integrity** (A.3).
+- **Live Tap keys + one verified end-to-end transaction** (per the billing flow).
+- **SOC 2 / compliance badge accuracy** — only display if true.
+**The regulatory consult (human, not agent):** like the stock app — a product giving paid personalized financial/portfolio guidance can touch investment-adviser / financial-promotion rules that vary by jurisdiction (Oman/GCC vs global/US). I'm not a lawyer; get a professional read before taking money. This is the one "don't ship without checking" item.
+**Safe to iterate:** smoothness, token tidy, seed depth, table polish.
+
+---
+
+## H — Priority roadmap
+**P0 — Compliance + integrity (blockers):** financial disclaimers (A.1) · number-provenance audit + honest labeling (A.2) · Smart Contracts/verification disclaimers (A.3) · SOC2 badge accuracy · live billing keys + test txn (G). `[component]`/`[structural]`
+**P1 — Consistency + smoothness:** hub tokens + tokenized accents + tabular numbers (B) · smoothness layer + streaming AI + reduced-motion (C) · seed real data for breadth (D). `[token/CSS]`/`[component]`
+**P2 — Governance + depth:** RBAC/tenant-isolation verification + audit logging (E) · dense exportable tables (E) · RTL/locale verification (F) · sidebar/active-state/empty-state polish (F). `[structural]`/`[component]`
+
+---
+
+## I — "Definition of done"
+- Every financial/score screen carries a visible "not financial advice" disclaimer; Smart Contracts carry "not legal advice."
+- Every AI-produced number is either computed from real data or honestly labeled as a model estimate — no hallucinated numbers presented as analysis.
+- Verified Badge rests on a real check; SOC 2 / compliance badges are accurate.
+- Billing works end-to-end; sections seeded so nothing reads as empty demo-ware.
+- Light/sage theme kept; hub-reconciled tokens; tabular numbers everywhere; one hover contract.
+- Smoothness present: optimistic UI, streaming AI, layout-matched skeletons, 60fps, reduced-motion; Cmd+K fast.
+- RBAC + tenant isolation enforced server-side and logged; dense exportable tables; RTL/locale verified.
+
+### One-line summary
+WealthSync is already restrained and corporate-looking, so don't repaint it — the real work is the finance-AI integrity it shares with your stock and BrainPower engines: put "not financial advice" on every guidance screen, audit whether its risk/confidence scores are computed or just GPT-4o text (and label/fix accordingly), make the "Verified" and "SOC 2" badges actually true, then add the missing smoothness layer and seed the two-dozen features with real data so the breadth reads as substance, not demo-ware. And get a regulatory read before taking money — same as the stock app.

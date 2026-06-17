@@ -1,0 +1,60 @@
+Smarthinkerz Tap Payments — Integration Brief
+What this is
+Smarthinkerz hosts a checkout endpoint that creates a Tap Payments charge and redirects the customer to Tap's hosted payment page. You do not need a Tap API key — Smarthinkerz handles all Tap communication server-side.
+
+Endpoint
+POST https://smarthinkerz.replit.app/api/checkout
+Content-Type: application/x-www-form-urlencoded
+
+No API key, no auth header required.
+
+Required form fields
+Field	Type	Notes
+plan	string	Plan slug (see list below)
+cycle	string	monthly or yearly — omit for bootcamp plans
+name	string	Customer full name
+email	string	Customer email
+phone	string	Phone with country code, e.g. +96599887766
+Plan slugs
+Subscriptions (require cycle):
+
+studio-starter, studio-pro, studio-enterprise
+commentcustomer-starter, commentcustomer-pro, commentcustomer-enterprise
+komuin-starter, komuin-pro, komuin-enterprise
+tabiai-starter, tabiai-pro, tabiai-enterprise
+brainpower-starter, brainpower-pro, brainpower-enterprise
+stockaitrader-starter, stockaitrader-pro, stockaitrader-enterprise
+One-time (no cycle):
+
+bootcamp-foundation, bootcamp-advanced, bootcamp-mastery
+Response behavior
+Success: HTTP 303 See Other with Location: header pointing to the Tap hosted payment page (https://checkout.tap.company/...). The agent must follow the redirect in the user's browser.
+Validation error: HTTP 400 with JSON { error: "..." }.
+After payment
+Tap redirects the customer back to Smarthinkerz:
+
+Success → https://smarthinkerz.replit.app/checkout/success?order_id=...
+Failure → https://smarthinkerz.replit.app/checkout/failed?order_id=...
+The third-party agent does not need to handle the return — Smarthinkerz manages confirmation emails, order records, and webhook reconciliation.
+
+Example (HTML form)
+<form action="https://smarthinkerz.replit.app/api/checkout" method="POST">
+  <input name="plan"  value="tabiai-pro">
+  <input name="cycle" value="monthly">
+  <input name="name"  value="Ahmed Ali">
+  <input name="email" value="ahmed@example.com">
+  <input name="phone" value="+96599887766">
+  <button type="submit">Pay</button>
+</form>
+
+Example (fetch — must use redirect: 'follow' or read Location)
+const res = await fetch("https://smarthinkerz.replit.app/api/checkout", {
+  method: "POST",
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body: new URLSearchParams({
+    plan: "studio-pro", cycle: "yearly",
+    name: "Ahmed Ali", email: "ahmed@example.com", phone: "+96599887766"
+  }),
+  redirect: "manual"
+});
+const checkoutUrl = res.headers.get("Location"); // send user here
