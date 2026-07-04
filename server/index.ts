@@ -117,7 +117,7 @@ app.use(session({
       });
     });
 
-    const port = 5000;
+    const port = Number(process.env.PORT) || 5000;
     const httpServer = server.listen(port, "0.0.0.0", () => {
       console.log(`Server running at http://0.0.0.0:${port}`);
     }).on('error', (err) => {
