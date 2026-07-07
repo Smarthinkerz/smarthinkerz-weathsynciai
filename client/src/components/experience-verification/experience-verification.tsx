@@ -1,7 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
-import { SiLinkedin } from "react-icons/si";
-import { Briefcase, Users, Award, FolderGit2 } from "lucide-react";
+import { Briefcase, Users, Award, FolderGit2, Linkedin } from "lucide-react";
 import { WorkHistoryForm } from "./work-history-form";
 import { ReferenceForm } from "./reference-form";
 import { CertificateForm } from "./certificate-form";
@@ -31,7 +30,7 @@ export function ExperienceVerification() {
             Projects
           </TabsTrigger>
           <TabsTrigger value="linkedin" className="flex items-center gap-2">
-            <SiLinkedin className="h-4 w-4" />
+            <Linkedin className="h-4 w-4" />
             LinkedIn
           </TabsTrigger>
         </TabsList>
@@ -54,3 +53,4 @@ export function ExperienceVerification() {
     </Card>
   );
 }
+
