@@ -3,8 +3,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { SiLinkedin } from "react-icons/si";
-import { Loader2 } from "lucide-react";
+import { Loader2, Linkedin } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/use-auth";
@@ -51,7 +50,7 @@ export function LinkedInVerification() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2">
-        <SiLinkedin className="h-5 w-5 text-[#0A66C2]" />
+        <Linkedin className="h-5 w-5 text-[#0A66C2]" />
         <h3 className="text-lg font-medium">LinkedIn Verification</h3>
       </div>
 
@@ -77,7 +76,7 @@ export function LinkedInVerification() {
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
                 <>
-                  <SiLinkedin className="h-4 w-4" />
+                  <Linkedin className="h-4 w-4" />
                   Link Profile
                 </>
               )}
@@ -100,3 +99,4 @@ export function LinkedInVerification() {
     </div>
   );
 }
+
